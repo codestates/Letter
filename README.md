@@ -38,7 +38,7 @@ Letter는 그런 당신의 감성을 깨워드립니다.<br>
 | :----------- | :------------: | :------------: | :------------: | :------------: |
 | 팀장 | 윤주봉 | Front-End | dbswnqhd12 | a01040406509@gmail.com |
 | 팀원 | 심민재 | Back-End | crq932 | crq932@gmail.com |
-| 팀원 | 임정환 | Front-End | dlawjdghks11 | dlawjdghks11@naver.com |
+| 팀원 | 임정환 | Full(Front-End&Back-End) | dlawjdghks11 | dlawjdghks11@naver.com |
 | 팀원 | 정주영 | Front-End | juyeong7 | wjdwndud1427@naver.com |
 
 <br>
