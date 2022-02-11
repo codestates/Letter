@@ -25,7 +25,7 @@ Letter는 그런 당신의 감성을 깨워드립니다.<br>
 <br>
 <br>
 
-## Wireframe
+## Tech-stack
 ![Web App Reference Architecture](https://user-images.githubusercontent.com/83914184/153347619-156496c2-8b62-4ef3-892e-c939aa572dfe.png)
 
 <br>
