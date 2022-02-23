@@ -24,7 +24,7 @@ const LeftContainer = styled.div`
 `;
 
 const Logo = styled.img`
-  widgh: 50px;
+  width: 50px;
   height: 30px;
   margin-right: 15px;
   cursor: pointer;
@@ -52,7 +52,7 @@ const RightContainer = styled.div`
   height: 2rem;
   display: flex;
   justify-content: end;
-  align-item: center;
+  align-items: center;
 `;
 
 const LoginBtn = styled.button`
