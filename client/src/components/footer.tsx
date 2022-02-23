@@ -12,16 +12,16 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 768px) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-size: cover;
+  }
 `;
 
-// const Wrapper = styled.div`
-//   height: auto;
-//   min-height: 100%;
-//   padding-bottom: 10rem;
-// `;
-
 const LeftContainer = styled.div`
-  width: 60%;
+  width: 30vw;
   height: 160px;
   display: flex;
   justify-content: space-evenly;
@@ -35,16 +35,28 @@ const Logo = styled.img`
 `;
 
 const Content = styled.div`
-  width: 600px;
+  width: 20vw;
   height: 160px;
   color: #ab8643;
   display: flex;
   align-items: center;
   margin-left: 10px;
+  font-family: "Noto Sans KR";
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const RightContainer = styled.div`
+  width: 70vw;
+  height: 160px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
 `;
 
 const ServiceContainer = styled.div`
-  width: 1900px;
+  width: 20vw;
   height: 110px;
   color: #ab8643;
   font-weight: bold;
@@ -52,6 +64,7 @@ const ServiceContainer = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: start;
+  font-family: "Noto Sans KR";
 `;
 
 const ServiceContent = styled.div`
@@ -66,11 +79,11 @@ const ServiceImage = styled.img`
 `;
 
 const AboutContainer = styled.div`
-  width: 1200px;
+  width: 20vw;
   height: 110px;
   color: #ab8643;
   display: flex;
-  align-items: center;
+  align-items: start;
   flex-direction: column;
 `;
 
@@ -78,11 +91,12 @@ const AboutTitle = styled.div`
   width: 70px;
   height: 16px;
   font-weight: bold;
+  font-family: "Noto Sans KR";
 `;
 
 const AboutContent = styled.div`
   width: 70px;
-  height: 90px;
+  height: 70px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -92,29 +106,51 @@ const AboutContent = styled.div`
 
 const AboutContent_a = styled.div`
   width: 45px;
-  height: 32px;
+  height: 22px;
   cursor: pointer;
+  font-family: "Noto Sans KR";
 `;
 
 const AboutContent_b = styled.div`
   width: 45px;
-  height: 32px;
+  height: 22px;
   cursor: pointer;
+  font-family: "Noto Sans KR";
 `;
 
 const AboutContent_c = styled.div`
   width: 45px;
-  height: 32px;
+  height: 22px;
   cursor: pointer;
+  font-family: "Noto Sans KR";
 `;
 
 const AboutContent_d = styled.div`
   width: 45px;
   height: 32px;
   cursor: pointer;
+  font-family: "Noto Sans KR";
+`;
+
+const StyledLink = styled.a`
+  text-decoration: none;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+  color: #ab8643;
 `;
 
 function Footer() {
+  const githubUri = `https://github.com/codestates/Letter`;
+  const bongUri = `https://github.com/dbswnqhd12`;
+  const minUri = `https://github.com/crq932`;
+  const hwanUri = `https://github.com/dlawjdghks11`;
+  const jooUri = `https://github.com/juyeong7`;
+
   return (
     <>
       <Container>
@@ -122,19 +158,31 @@ function Footer() {
           <Logo src={logo} />
           <Content>© 2022 Copyright Letter Inc. All rights reserved.</Content>
         </LeftContainer>
-        <ServiceContainer>
-          <ServiceContent>Service</ServiceContent>
-          <ServiceImage src={github} />
-        </ServiceContainer>
-        <AboutContainer>
-          <AboutTitle>About us</AboutTitle>
-          <AboutContent>
-            <AboutContent_a>윤주봉</AboutContent_a>
-            <AboutContent_b>심민재</AboutContent_b>
-            <AboutContent_c>임정환</AboutContent_c>
-            <AboutContent_d>정주영</AboutContent_d>
-          </AboutContent>
-        </AboutContainer>
+        <RightContainer>
+          <ServiceContainer>
+            <ServiceContent>Service</ServiceContent>
+            <a href={githubUri}>
+              <ServiceImage src={github} />
+            </a>
+          </ServiceContainer>
+          <AboutContainer>
+            <AboutTitle>About us</AboutTitle>
+            <AboutContent>
+              <StyledLink href={bongUri}>
+                <AboutContent_a>윤주봉</AboutContent_a>
+              </StyledLink>
+              <StyledLink href={minUri}>
+                <AboutContent_b>심민재</AboutContent_b>
+              </StyledLink>
+              <StyledLink href={hwanUri}>
+                <AboutContent_c>임정환</AboutContent_c>
+              </StyledLink>
+              <StyledLink href={jooUri}>
+                <AboutContent_d>정주영</AboutContent_d>
+              </StyledLink>
+            </AboutContent>
+          </AboutContainer>
+        </RightContainer>
       </Container>
     </>
   );
