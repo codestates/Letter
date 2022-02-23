@@ -2,9 +2,10 @@ import React from "react";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import Landing from "./pages/landing";
-//import Login from "./pages/login";
-// import Mypage from "./pages/mypage";
-// import Signup from "./pages/signup";
+import Login from "./pages/login";
+import Mypage from "./pages/mypage";
+import Signup from "./pages/signup";
+import Main from "./pages/main";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import { createGlobalStyle } from "styled-components";
@@ -48,19 +49,14 @@ function App() {
       <GlobalStyle />
       <BrowserRouter>
         <Header {...isLogin} {...handleLogout} />
-        <Landing />
-        <Footer />
         <Routes>
-          {/* <Route path="/login">
-          <Login />
-         </Route> */}
-          {/* <Route path="/mypage">
-          <Mypage />
-         </Route> */}
-          {/* <Route path="/signup">
-          <Signup />
-         </Route> */}
+          <Route path="/" element={<Landing />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/mypage" element={<Mypage />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/main" element={<Main />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );
