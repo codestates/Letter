@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import logo from "../images/logo_letter.svg";
-//import font from "../font/NotoSansKR-Regular.otf";
 import { Link } from "react-router-dom";
 import defaultImage from "../images/defaultImage-f.png";
 import { Iprops } from "../app";
@@ -35,6 +34,7 @@ const LetterBtn = styled.button`
   width: 55px;
   height: 30px;
   font-size: 11px;
+  font-family: "Noto Sans KR";
   cursor: pointer;
   background-color: rgba(171, 134, 67, 1);
   color: rgba(255, 255, 255, 1);
@@ -59,6 +59,7 @@ const LoginBtn = styled.button`
   width: 55px;
   height: 30px;
   font-size: 11px;
+  font-family: "Noto Sans KR";
   cursor: pointer;
   background-color: rgba(171, 134, 67, 1);
   color: rgba(255, 255, 255, 1);
@@ -85,7 +86,7 @@ const DropdownContent = styled.div`
   display: none;
   position: absolute;
   background-color: #fffcfb;
-  min-width: 120px;
+  min-width: 125px;
   box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 `;
@@ -94,6 +95,7 @@ const DropdownContentText = styled.div`
   color: #ab8643;
   padding: 15px 25px;
   text-decoration: none;
+  font-family: "Noto Sans KR";
   display: block;
   cursor: pointer;
   &:hover {
