@@ -13,19 +13,19 @@ export async function generateToken(email: string) {
   );
 }
 export async function authorizeToken(req: Request, res: Response) {
-  const authorization = req.headers.authorization;
+  const authorization = req.headers.cookie;
   if (!authorization) {
-    return null;
+    return res.status(403).json({ message: 'Invalid Accesstoken' });
   }
-  const token = authorization.split(' ')[1];
+  const token = authorization.split('=')[1].split(' ')[0];
   const data = jwt.verify(
     token,
     process.env.JWT_SECRETKEY,
-    (err: object|string, decoded: object) => {
+    (err: object|string, tokenData: object) => {
       if (err) {
         return res.status(403).json({ message: 'Invalid Accesstoken' });
       } else {
-        return decoded;
+        return tokenData;
       }
     },
   );

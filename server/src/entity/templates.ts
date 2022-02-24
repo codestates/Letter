@@ -1,39 +1,43 @@
 import { 
   Entity, 
-  PrimaryGeneratedColumn, 
-  Column,
+  PrimaryGeneratedColumn,
+  Column, 
   CreateDateColumn,
-  OneToMany 
+  UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
 import { users_templates } from './users_templates';
 
 @Entity()
-export default class users {
-    
+export class templates {
+      
     @PrimaryGeneratedColumn()
       id: number;
-
+  
     @Column()
-      email: string;
-
+      content: string;
+  
     @Column()
-      password: string;
-
+      category: string;
+  
     @Column()
-      name: string;
-
+      font: string;
+  
     @Column()
-      nickname: string;
-    
+      font_size: number;
+      
     @Column()
-      gender: string;
-
+      hits: number;
+  
     @Column()
-      image: string;
-    
+      letter_type: string;
+      
     @CreateDateColumn()
     readonly created_at: Date;
-    
+
+    @UpdateDateColumn()
+    readonly updated_at: Date;
+
     @OneToMany(() => users_templates, (users_templates) => users_templates.templates_id,)
       users_templates: users_templates[];
 }
