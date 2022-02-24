@@ -16,9 +16,9 @@ export default async (req: Request, res: Response) => {
   if (!email || !nickname || !password) {
     return res.status(400).json({ message: 'error' });
   } else {
-    const userInfo = await usersRepository.findOne({ email: email });
-  
-    if (userInfo) {
+    const findEmail = await usersRepository.findOne({ email: email });
+    const findNickname = await usersRepository.findOne({ nickname: nickname});
+    if (findEmail || findNickname) {
       return res.status(409).json({ message: 'Account already exists' });
     }
     await usersRepository.insert({
@@ -27,7 +27,7 @@ export default async (req: Request, res: Response) => {
       password: password,
       name: req.body.name,
       gender : req.body.gender,
-      image : req.body.image
+      image : 'no image'
     });
   
     return res.status(201).json({ message: 'ok' });
