@@ -3,6 +3,7 @@ import mainImage from "../images/basic.jpg";
 import Letterlogo from "../images/logo_letter.svg";
 import Googlelogo from "../images/google_logo.png";
 import Kakaologo from "../images/kakao_logo.jpeg";
+import { Link } from "react-router-dom";
 
 const BackgroundContainer = styled.div`
   width: 100vw;
@@ -175,7 +176,9 @@ function Login() {
                 <KakaoImg src={Kakaologo} />
                 카카오 로그인하기
               </KakaoLoginBtn>
-              <SignupBtn>회원가입</SignupBtn>
+              <Link to="/signup">
+                <SignupBtn>회원가입</SignupBtn>
+              </Link>
             </TextContainer>
           </Container>
         </LoginContainer>
