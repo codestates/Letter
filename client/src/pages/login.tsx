@@ -17,6 +17,7 @@ const BackgroundContainer = styled.div`
   background-image: url(${mainImage});
   background-size: cover;
   color: white;
+  overflow-x: hidden;
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -84,7 +85,7 @@ const LoginPw = styled.input.attrs({
 
 const LoginBtn = styled.button`
   height: 40px;
-  width: 60%;
+  width: 200px;
   font-size: 14px;
   padding: 13px 30px;
   cursor: pointer;
@@ -143,7 +144,7 @@ const KakaoImg = styled.img`
 
 const SignupBtn = styled.button`
   height: 40px;
-  width: 60%;
+  width: 200px;
   font-size: 14px;
   padding: 13px 30px;
   cursor: pointer;
