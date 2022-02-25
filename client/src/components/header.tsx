@@ -24,7 +24,7 @@ const LeftContainer = styled.div`
 `;
 
 const Logo = styled.img`
-  width: 50px;
+  width: 70px;
   height: 30px;
   margin-right: 15px;
   cursor: pointer;
