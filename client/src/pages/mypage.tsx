@@ -2,6 +2,8 @@ import styled from "styled-components";
 import mainImage from "../images/basic.jpg";
 import FemaleLogo from "../images/defaultImage-f.png";
 // import MaleLogo from "../images/defaultImage-m.png";
+import TypewriterImg from "../images/Typewriter.svg";
+import Mypost from "../components/mypost";
 
 const BackgroundContainer = styled.div`
   width: 100vw;
@@ -19,7 +21,7 @@ const BackgroundContainer = styled.div`
 
 const BackgroundImg = styled.div`
   width: 40%;
-  height: 100vh;
+  height: 103vh;
   display: flex;
   justify-content: center;
   overflow-y: auto;
@@ -49,16 +51,15 @@ const Container = styled.div`
 `;
 
 const ProfileContainer = styled.div`
-  border: 1px solid black;
   width: 100%;
-  height: 40vh;
+  height: 45vh;
   display: flex;
 `;
 
 const ProfileImgContainer = styled.img`
-  width: 30%;
-  height: 50%;
-  margin-left: 45px;
+  width: 150px;
+  height: 150px;
+  margin-left: 120px;
   margin-top: 140px;
   flex-direction: column-reverse;
 `;
@@ -74,13 +75,19 @@ const LogoutBtn = styled.button`
   height: 20px;
   border-radius: 100px;
   font-size: 10px;
-  margin-left: 280px;
+  margin-left: 80%;
   border: 0;
   outline: 0;
   cursor: pointer;
   background-color: #ab8643;
   color: rgb(252, 251, 251);
+  &:hover {
+    background-color: #fffcfb;
+    color: #ab8643;
+    border: 1px solid #ab8643;
+  }
 `;
+
 const NicknameContainer = styled.div`
   height: 20px;
   padding: 0px 35px;
@@ -123,6 +130,11 @@ const EditProfileBtn = styled.button`
   border: 1px solid #ab8643;
   border-radius: 5px;
   border-style: none;
+  &:hover {
+    background-color: #fffcfb;
+    color: #ab8643;
+    border: 1px solid #ab8643;
+  }
 `;
 
 const QuitBtn = styled.button`
@@ -137,12 +149,91 @@ const QuitBtn = styled.button`
   border-radius: 5px;
   border: 1px solid #ab8643;
   outline: 0;
+  &:hover {
+    background-color: #ab8643;
+    color: #fffcfb;
+  }
 `;
 
 const MypostContainer = styled.div`
-  border: 1px solid black;
   width: 100%;
-  height: 60vh;
+  height: 55vh;
+  flex-direction: column;
+`;
+
+const TextContainer = styled.div`
+  width: 80px;
+  height: 20px;
+  color: #ab8643;
+  text-decoration: underline;
+  text-underline-position: under;
+  text-decoration-color: #d3b47b;
+  margin-left: 30px;
+`;
+
+const Container2 = styled.div`
+  width: 100%;
+  height: 50vh;
+  justify-content: center;
+  text-align: center;
+`;
+
+const ImgContainer = styled.img`
+  width: 180px;
+  height: 200px;
+`;
+
+const TextContainer2 = styled.div`
+  width: 200px;
+  height: 50px;
+  font-size: 20px;
+  color: #ab8643;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: lighter;
+`;
+
+const WriteLetterBtn = styled.button`
+  height: 40px;
+  width: 170px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: rgb(252, 251, 251);
+  color: #ab8643;
+  line-height: 1px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid #ab8643;
+  outline: 0;
+  &:hover {
+    background-color: #ab8643;
+    color: #fffcfb;
+  }
+`;
+
+const MypostContainer2 = styled.div`
+  width: 100%;
+  height: 350px;
+  margin-top: 22px;
+  display: flex;
+`;
+
+const MoreBtn = styled.button`
+  border: 1px solid #ab8643;
+  width: 50px;
+  height: 50px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: -15px;
+  cursor: pointer;
+  font-size: 30px;
+  font-weight: bolder;
+  border-radius: 30px;
+  background-color: white;
+  &:hover {
+    box-shadow: -1px 1px 1px 1px gray;
+  }
 `;
 
 function Mypage() {
@@ -166,7 +257,22 @@ function Mypage() {
               </ButtonContainer>
             </ProfileContentContainer>
           </ProfileContainer>
-          <MypostContainer></MypostContainer>
+          <MypostContainer>
+            <TextContainer>내가 쓴 편지</TextContainer>
+            {/* <Container2>
+              <ImgContainer src={TypewriterImg}></ImgContainer>
+              <TextContainer2>
+                작성한 편지가 없습니다. 작성하러 가 볼까요?
+              </TextContainer2>
+              <WriteLetterBtn>편지쓰러 가기</WriteLetterBtn>
+            </Container2> */}
+            <MypostContainer2>
+              <Mypost />
+              <Mypost />
+              <Mypost />
+              <MoreBtn> 〉</MoreBtn>
+            </MypostContainer2>
+          </MypostContainer>
         </Container>
       </BackgroundContainer>
     </div>

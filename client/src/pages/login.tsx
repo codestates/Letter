@@ -96,6 +96,11 @@ const LoginBtn = styled.button`
   margin-bottom: 12px;
   border-radius: 3px;
   border-style: none;
+  &:hover {
+    background-color: #fffcfb;
+    color: #ab8643;
+    border: 1px solid #ab8643;
+  }
 `;
 
 const GoogleLoginBtn = styled.button`
@@ -112,6 +117,9 @@ const GoogleLoginBtn = styled.button`
   border-style: none;
   border: 1px solid rgba(222, 222, 222, 1);
   vertical-align: middle;
+  &:hover {
+    background-color: #f1eee7;
+  }
 `;
 
 const GoogleImg = styled.img`
@@ -133,6 +141,9 @@ const KakaoLoginBtn = styled.button`
   border-radius: 3px;
   border-style: none;
   border: 1px solid rgba(222, 222, 222, 1);
+  &:hover {
+    background-color: #f1eee7;
+  }
 `;
 
 const KakaoImg = styled.img`
@@ -156,6 +167,10 @@ const SignupBtn = styled.button`
   border-radius: 3px;
   border-style: none;
   border: 1px solid #ab8643;
+  &:hover {
+    background-color: #ab8643;
+    color: #fffcfb;
+  }
 `;
 
 function Login() {
