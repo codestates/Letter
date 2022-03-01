@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import FemaleLogo from "../images/defaultImage-f.png";
+import { Eprops } from "../pages/mypage";
 
 const ModalContainer = styled.div`
   height: 15rem;
@@ -27,9 +28,44 @@ const ModalView = styled.div.attrs(() => {
   background-color: #ffffff;
   width: 497px;
   height: 488px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+`;
+
+const ProfileImgContainer = styled.div`
+  border: 1px solid black;
+  width: 230px;
+  height: 300px;
+  margin-left: 30px;
+`;
+
+const ProfileImg = styled.img`
+  width: 200px;
+  height: 200px;
+  margin-top: 40px;
+`;
+
+const EditProfileBtn = styled.button`
+  height: 32px;
+  width: 122px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #ab8643;
+  color: rgb(252, 251, 251);
+  line-height: 1px;
+  border: 1px solid #ab8643;
+  border-radius: 5px;
+  border-style: none;
+  margin-top: 20px;
+  &:hover {
+    background-color: #fffcfb;
+    color: #ab8643;
+    border: 1px solid #ab8643;
+  }
+`;
+
+const ProfileContentContainer = styled.div`
+  border: 1px solid black;
+  width: 230px;
+  height: 300px;
 `;
 
 const CloseBtn = styled.span`
@@ -46,12 +82,21 @@ const CloseBtn = styled.span`
   outline: 0;
 `;
 
-function EditProfileModal(): JSX.Element {
+function EditProfileModal(
+  isOpen1: Eprops["isOpen1"],
+  setIsOpen1: Eprops["setIsOpen1"]
+): JSX.Element {
   return (
     <ModalContainer>
       <ModalBackdrop>
         <ModalView onClick={(e: any) => e.stopPropagation()}>
-          <CloseBtn>×</CloseBtn>
+          <ProfileImgContainer>
+            <ProfileImg src={FemaleLogo} />
+            <EditProfileBtn>사진 편집</EditProfileBtn>
+          </ProfileImgContainer>
+          <ProfileContentContainer>
+            <CloseBtn>×</CloseBtn>
+          </ProfileContentContainer>
         </ModalView>
       </ModalBackdrop>
     </ModalContainer>

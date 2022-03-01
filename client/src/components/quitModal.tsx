@@ -2,6 +2,7 @@ import styled from "styled-components";
 import FemaleLogo from "../images/defaultImage-f.png";
 import { Qprops } from "../pages/mypage";
 import NoticeResign from "./noticeResign";
+import { useState } from "react";
 
 const ModalContainer = styled.div`
   height: 15rem;
@@ -101,14 +102,20 @@ const QuitBtn = styled.button`
 `;
 
 function QuitModal(
-  isOpen: Qprops["isOpen2"],
-  modalHandler2: Qprops["modalHandler2"]
+  isOpen2: Qprops["isOpen2"],
+  setIsOpen2: Qprops["setIsOpen2"]
 ): JSX.Element {
-  return (
+  const [openModal, setOpenModal] = useState(false);
+  const modalHandler = () => {
+    setOpenModal(!openModal);
+  };
+  return openModal ? (
+    <div></div>
+  ) : (
     <ModalContainer>
       <ModalBackdrop>
         <ModalView onClick={(e: any) => e.stopPropagation()}>
-          <CloseBtn onClick={() => modalHandler2}>×</CloseBtn>
+          <CloseBtn onClick={modalHandler}>×</CloseBtn>
           <ProfileImgContainer src={FemaleLogo} />
           <Password />
           <PasswordCheck />
