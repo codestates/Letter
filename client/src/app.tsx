@@ -6,10 +6,14 @@ import Login from "./pages/login";
 import Mypage from "./pages/mypage";
 import Signup from "./pages/signup";
 import Main from "./pages/main";
+import Thank from "./pages/thank";
+import Congratulation from "./pages/congratulation";
+import Request from "./pages/request";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
+import BigScreen from "./pages/bigScreen";
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -55,6 +59,10 @@ function App() {
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/main" element={<Main />} />
+          <Route path="/thank" element={<Thank />} />
+          <Route path="/congratulaion" element={<Congratulation />} />
+          <Route path="/request" element={<Request />} />
+          <Route path="/bigScreen" element={<BigScreen />} />
         </Routes>
         <Footer />
       </BrowserRouter>
