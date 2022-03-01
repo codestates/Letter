@@ -4,6 +4,8 @@ import signupController from '../controllers/user/Signup';
 import loginController from '../controllers/user/Login';
 import logoutController from '../controllers/user/logout';
 import { validationCheck } from '../controllers/user/validationCheck';
+import googleController from '../controllers/user/google';
+import kakaoController from '../controllers/user/kakao';
 
 import { updateTables } from '../controllers/tables/update';
 import { deleteTables } from '../controllers/tables/delete';
@@ -19,8 +21,11 @@ import { Images } from '../controllers/aws/util';
 router.post('/signup', signupController);
 router.post('/login', loginController);
 router.post('/logout',logoutController);
+router.post('/emailcheck', validationCheck.email);
 router.post('/nickcheck', validationCheck.nickname);
 router.post('/delpassword', validationCheck.delMyAccPassword);
+router.post('/google', googleController.token);
+router.post('/kakao', kakaoController.token);
 
 router.patch('/updateuser/:userId', updateTables.userUpdate);
 router.patch('/updatetemplate/:templateId', updateTables.templateUpdate);
