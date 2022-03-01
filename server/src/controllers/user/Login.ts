@@ -22,6 +22,7 @@ export default async (req: Request, res: Response) => {
   });
   if (userInfo) {
     const token = await generateToken(userInfo.email);
+    userInfo.password = '';
     return res
       .cookie('jwt', token, {
         httpOnly: true,
