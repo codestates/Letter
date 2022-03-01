@@ -4,6 +4,9 @@ import FemaleLogo from "../images/defaultImage-f.png";
 // import MaleLogo from "../images/defaultImage-m.png";
 import TypewriterImg from "../images/Typewriter.svg";
 import Mypost from "../components/mypost";
+import { useState } from "react";
+import QuitModal from "../components/quitModal";
+import EditProfileModal from "../components/editProfileModal";
 
 const BackgroundContainer = styled.div`
   width: 100vw;
@@ -220,7 +223,7 @@ const MypostContainer2 = styled.div`
 `;
 
 const MoreBtn = styled.button`
-  border: 1px solid #ab8643;
+  border: 2px solid #ab8643;
   width: 50px;
   height: 50px;
   margin-top: auto;
@@ -236,7 +239,27 @@ const MoreBtn = styled.button`
   }
 `;
 
+export interface Eprops {
+  isOpen1: boolean;
+  modalHandler1: () => void;
+}
+
+export interface Qprops {
+  isOpen2: boolean;
+  modalHandler2: () => void;
+}
+
 function Mypage() {
+  const [isOpen1, setIsOpen1] = useState(false);
+  const [isOpen2, setIsOpen2] = useState(false);
+
+  const modalHandler1 = () => {
+    setIsOpen1(!isOpen1);
+  };
+
+  const modalHandler2 = () => {
+    setIsOpen2(!isOpen2);
+  };
   return (
     <div>
       <BackgroundContainer>
@@ -252,8 +275,12 @@ function Mypage() {
               <EmailContainer>letter123@letter.com</EmailContainer>
               <PasswordContainer>비밀번호: ********</PasswordContainer>
               <ButtonContainer>
-                <EditProfileBtn>프로필 편집</EditProfileBtn>
-                <QuitBtn>회원 탈퇴</QuitBtn>
+                <EditProfileBtn onClick={modalHandler1}>
+                  프로필 편집
+                </EditProfileBtn>
+                {isOpen1 ? <EditProfileModal /> : null}
+                <QuitBtn onClick={modalHandler2}>회원 탈퇴</QuitBtn>
+                {isOpen2 ? <QuitModal {...isOpen2} {...modalHandler2} /> : null}
               </ButtonContainer>
             </ProfileContentContainer>
           </ProfileContainer>
