@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import FemaleLogo from "../images/defaultImage-f.png";
-import { Qprops } from "../pages/mypage";
 import NoticeResign from "./noticeResign";
 import { useState } from "react";
 
@@ -101,13 +100,15 @@ const QuitBtn = styled.button`
   }
 `;
 
-function QuitModal(
-  isOpen2: Qprops["isOpen2"],
-  setIsOpen2: Qprops["setIsOpen2"]
-): JSX.Element {
+type GreetFunction = (isModal: boolean) => void;
+type UserProps = {
+  ModalHandler: GreetFunction;
+};
+function QuitModal({ ModalHandler }: UserProps): JSX.Element {
   const [openModal, setOpenModal] = useState(false);
   const modalHandler = () => {
     setOpenModal(!openModal);
+    ModalHandler(false);
   };
   return openModal ? (
     <div></div>

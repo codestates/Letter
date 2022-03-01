@@ -34,7 +34,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/mypage" element={<Mypage />} />
+          <Route
+            path="/mypage"
+            element={<Mypage {...isLogin} {...handleLogout} />}
+          />
           <Route path="/signup" element={<Signup />} />
           <Route path="/main" element={<Main />} />
           <Route path="/thank" element={<Thank />} />
