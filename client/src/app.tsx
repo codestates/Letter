@@ -11,30 +11,8 @@ import Congratulation from "./pages/congratulation";
 import Request from "./pages/request";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
-import { createGlobalStyle } from "styled-components";
-import reset from "styled-reset";
 import BigScreen from "./pages/bigScreen";
-
-const GlobalStyle = createGlobalStyle`
-  ${reset}
-  /* other styles */
-  @font-face {
-    font-family: 'Handletter';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/naverfont_05@1.0/Handletter.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-  }
-  @font-face {
-    font-family: 'SangSangShin';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/SangSangShin.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-  } 
-  @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
-  .notosanskr * { 
-     font-family: 'Noto Sans KR', sans-serif;
-  }
-`;
+import GlobalStyle from "./globalStyle";
 
 export interface Iprops {
   isLogin: boolean;
