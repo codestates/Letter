@@ -241,12 +241,12 @@ const MoreBtn = styled.button`
 
 export interface Eprops {
   isOpen1: boolean;
-  modalHandler1: () => void;
+  setIsOpen1: () => void;
 }
 
 export interface Qprops {
   isOpen2: boolean;
-  modalHandler2: () => void;
+  setIsOpen2: () => void;
 }
 
 function Mypage() {
@@ -278,9 +278,11 @@ function Mypage() {
                 <EditProfileBtn onClick={modalHandler1}>
                   프로필 편집
                 </EditProfileBtn>
-                {isOpen1 ? <EditProfileModal /> : null}
+                {isOpen1 ? (
+                  <EditProfileModal {...isOpen1} {...setIsOpen1} />
+                ) : null}
                 <QuitBtn onClick={modalHandler2}>회원 탈퇴</QuitBtn>
-                {isOpen2 ? <QuitModal {...isOpen2} {...modalHandler2} /> : null}
+                {isOpen2 ? <QuitModal {...isOpen2} {...setIsOpen2} /> : null}
               </ButtonContainer>
             </ProfileContentContainer>
           </ProfileContainer>
