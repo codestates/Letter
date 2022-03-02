@@ -10,9 +10,10 @@ import Thank from "./pages/thank";
 import Congratulation from "./pages/congratulation";
 import Request from "./pages/request";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BigScreen from "./pages/bigScreen";
 import GlobalStyle from "./globalStyle";
+import axios from "axios";
 
 export interface Iprops {
   isLogin: boolean;
@@ -21,6 +22,37 @@ export interface Iprops {
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
+  const [accessToken, setAccessToken] = useState("");
+
+  useEffect(() => {
+    componentSocialDidMount();
+  }, []);
+  const getSocialAccessToken = async (
+    authorizationCode: unknown,
+    social: string
+  ) => {
+    await axios
+      .post(
+        `http://localhost:7070${social}`,
+        { authorizationCode },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        setAccessToken(res.data.data.access_token);
+        setIsLogin(true);
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+  };
+
+  const componentSocialDidMount = () => {
+    const url = new URL(window.location.href);
+    const authorizationCode = url.searchParams.get("code");
+    if (authorizationCode) {
+      getSocialAccessToken(authorizationCode, url.pathname);
+    }
+  };
 
   const handleLogout = () => {
     setIsLogin(false);

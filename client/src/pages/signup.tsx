@@ -3,6 +3,8 @@ import mainImage from "../images/basic.jpg";
 import Letterlogo from "../images/logo_letter.svg";
 import FemaleLogo from "../images/defaultImage-f.png";
 import MaleLogo from "../images/defaultImage-m.png";
+import { useState } from "react";
+import axios from "axios";
 
 const BackgroundContainer = styled.div`
   width: 100vw;
@@ -114,7 +116,7 @@ const Password = styled.input.attrs({
 
 const PasswordCheck = styled.input.attrs({
   placeholder: "비밀번호확인",
-  type: "password",
+  type: "passwordVerify",
 })`
   margin-top: 5px;
   border-radius: 2px;
@@ -128,6 +130,7 @@ const PasswordCheck = styled.input.attrs({
 
 const NameInput = styled.input.attrs({
   placeholder: "이름",
+  type: "name",
 })`
   margin-top: 5px;
   border-radius: 2px;
@@ -148,6 +151,7 @@ const NicknameContainer = styled.div`
 
 const NicknameInput = styled.input.attrs({
   placeholder: "닉네임을 입력해 주세요",
+  type: "nickname",
 })`
   margin-top: 10px;
   border-radius: 2px;
@@ -207,7 +211,45 @@ const SignupBtn = styled.button`
 `;
 //
 function Signup() {
-  console.log("Signup");
+  const [userinfo, setUserinfo] = useState({
+    email: "",
+    password: "",
+    name: "",
+    nickname: "",
+    gender: "",
+  });
+
+  const handleInputValue = (key: string) => (e: any) => {
+    setUserinfo({ ...userinfo, [key]: e.target.value });
+  };
+
+  const handleValidationCheck = (key: string, value: string | number) => () => {
+    axios.post(
+      `http://localhost:7070/${key}check`,
+      { value },
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      }
+    );
+  };
+
+  const handleSignup = () => {
+    const { email, password, name, nickname, gender } = userinfo;
+    axios
+      .post(
+        "http://localhost:7070/signup",
+        { email, password, name, nickname, gender },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      )
+      .then((result) => {
+        result;
+      });
+  };
+
   return (
     <div>
       <BackgroundContainer>
@@ -216,27 +258,45 @@ function Signup() {
             <TextContainer>
               <LoginLogo src={Letterlogo} />
               <EmailContainer>
-                <EmailInput />
-                <ValidationBtn>중복확인</ValidationBtn>
+                <EmailInput onChange={handleInputValue("email")} />
+                <ValidationBtn
+                  onClick={handleValidationCheck("email", userinfo.email)}
+                >
+                  중복확인
+                </ValidationBtn>
               </EmailContainer>
-              <Password />
-              <PasswordCheck />
-              <NameInput />
+              <Password onChange={handleInputValue("password")} />
+              <PasswordCheck onChange={handleInputValue("passwordVerify")} />
+              <NameInput onChange={handleInputValue("name")} />
               <NicknameContainer>
-                <NicknameInput />
-                <ValidationBtn>중복확인</ValidationBtn>
+                <NicknameInput onChange={handleInputValue("nickname")} />
+                <ValidationBtn
+                  onClick={handleValidationCheck("nick", userinfo.nickname)}
+                >
+                  중복확인
+                </ValidationBtn>
               </NicknameContainer>
               <SelectContainer>
                 <SelectContainer2>
-                  <GenderRadioSelector type={"radio"} name="gender" value="F" />
+                  <GenderRadioSelector
+                    type={"radio"}
+                    name="gender"
+                    value="female"
+                    onClick={handleInputValue("gender")}
+                  />
                   <FemaleImg src={FemaleLogo} />
                 </SelectContainer2>
                 <SelectContainer2>
-                  <GenderRadioSelector type={"radio"} name="gender" value="M" />
+                  <GenderRadioSelector
+                    type={"radio"}
+                    name="gender"
+                    value="male"
+                    onClick={handleInputValue("gender")}
+                  />
                   <MaleImg src={MaleLogo} />
                 </SelectContainer2>
               </SelectContainer>
-              <SignupBtn>회원가입 완료</SignupBtn>
+              <SignupBtn onClick={handleSignup}>회원가입 완료</SignupBtn>
             </TextContainer>
           </Container>
         </SignupContainer>
