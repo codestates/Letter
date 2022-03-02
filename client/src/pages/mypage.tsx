@@ -7,6 +7,8 @@ import Mypost from "../components/mypost";
 import { useState } from "react";
 import QuitModal from "../components/quitModal";
 import EditProfileModal from "../components/editProfileModal";
+import { Iprops } from "../app";
+import { Link } from "react-router-dom";
 
 const BackgroundContainer = styled.div`
   width: 100vw;
@@ -46,6 +48,7 @@ const MypageText = styled.div`
   height: 7%;
   font-size: 5vw;
   font-weight: bold;
+  font-family: "Noto Sans KR";
 `;
 
 const Container = styled.div`
@@ -239,17 +242,10 @@ const MoreBtn = styled.button`
   }
 `;
 
-export interface Eprops {
-  isOpen1: boolean;
-  setIsOpen1: () => void;
-}
-
-export interface Qprops {
-  isOpen2: boolean;
-  setIsOpen2: () => void;
-}
-
-function Mypage() {
+function Mypage(
+  isLogin: Iprops["isLogin"],
+  handleLogout: Iprops["handleLogout"]
+) {
   const [isOpen1, setIsOpen1] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
 
@@ -270,7 +266,9 @@ function Mypage() {
           <ProfileContainer>
             <ProfileImgContainer src={FemaleLogo}></ProfileImgContainer>
             <ProfileContentContainer>
-              <LogoutBtn>로그아웃</LogoutBtn>
+              <Link to={{ pathname: "/" }}>
+                <LogoutBtn onClick={handleLogout}>로그아웃</LogoutBtn>
+              </Link>
               <NicknameContainer>손편지소녀</NicknameContainer>
               <EmailContainer>letter123@letter.com</EmailContainer>
               <PasswordContainer>비밀번호: ********</PasswordContainer>
@@ -278,11 +276,11 @@ function Mypage() {
                 <EditProfileBtn onClick={modalHandler1}>
                   프로필 편집
                 </EditProfileBtn>
-                {isOpen1 ? (
-                  <EditProfileModal {...isOpen1} {...setIsOpen1} />
-                ) : null}
                 <QuitBtn onClick={modalHandler2}>회원 탈퇴</QuitBtn>
-                {isOpen2 ? <QuitModal {...isOpen2} {...setIsOpen2} /> : null}
+                {isOpen1 ? (
+                  <EditProfileModal ModalHandler={modalHandler1} />
+                ) : null}
+                {isOpen2 ? <QuitModal ModalHandler={modalHandler2} /> : null}
               </ButtonContainer>
             </ProfileContentContainer>
           </ProfileContainer>

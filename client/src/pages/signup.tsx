@@ -91,6 +91,11 @@ const ValidationBtn = styled.button`
   margin-left: 10px;
   border-radius: 3px;
   border-style: none;
+  &:hover {
+    background-color: #fffcfb;
+    color: #ab8643;
+    border: 1px solid #ab8643;
+  }
 `;
 
 const Password = styled.input.attrs({
@@ -195,6 +200,10 @@ const SignupBtn = styled.button`
   border-radius: 3px;
   border-style: none;
   border: 1px solid #ab8643;
+  &:hover {
+    background-color: #ab8643;
+    color: #fffcfb;
+  }
 `;
 //
 function Signup() {
