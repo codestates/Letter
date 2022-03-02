@@ -4,6 +4,8 @@ import Letterlogo from "../images/logo_letter.svg";
 import Googlelogo from "../images/google_logo.png";
 import Kakaologo from "../images/kakao_logo.jpeg";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 const BackgroundContainer = styled.div`
   width: 100vw;
@@ -96,11 +98,6 @@ const LoginBtn = styled.button`
   margin-bottom: 12px;
   border-radius: 3px;
   border-style: none;
-  &:hover {
-    background-color: #fffcfb;
-    color: #ab8643;
-    border: 1px solid #ab8643;
-  }
 `;
 
 const GoogleLoginBtn = styled.button`
@@ -117,9 +114,6 @@ const GoogleLoginBtn = styled.button`
   border-style: none;
   border: 1px solid rgba(222, 222, 222, 1);
   vertical-align: middle;
-  &:hover {
-    background-color: #f1eee7;
-  }
 `;
 
 const GoogleImg = styled.img`
@@ -141,9 +135,6 @@ const KakaoLoginBtn = styled.button`
   border-radius: 3px;
   border-style: none;
   border: 1px solid rgba(222, 222, 222, 1);
-  &:hover {
-    background-color: #f1eee7;
-  }
 `;
 
 const KakaoImg = styled.img`
@@ -167,13 +158,36 @@ const SignupBtn = styled.button`
   border-radius: 3px;
   border-style: none;
   border: 1px solid #ab8643;
-  &:hover {
-    background-color: #ab8643;
-    color: #fffcfb;
-  }
 `;
 
 function Login() {
+  const [loginInfo, setLoginInfo] = useState({ email: "", password: "" });
+  const GOOGLE_AUTH_URL = `https://accounts.google.com/o/oauth2/auth?client_id=${process.env.REACT_APP_GOOGLE_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_GOOGLE_REDIRECT_URI}&response_type=code&scope=https://www.googleapis.com/auth/drive.metadata.readonly`;
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&response_type=code`;
+  const handleInputValue = (key: string) => (e: any) => {
+    setLoginInfo({ ...loginInfo, [key]: e.target.value });
+  };
+
+  const handleLogin = () => {
+    const { email, password } = loginInfo;
+    axios
+      .post(
+        "http://localhost:7070/login",
+        { email, password },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      )
+      .then((result) => {
+        result;
+      });
+  };
+
+  const socialLoginHandler = (url: string) => () => {
+    window.location.assign(url);
+  };
+
   return (
     <div>
       <BackgroundContainer>
@@ -181,14 +195,14 @@ function Login() {
           <Container>
             <TextContainer>
               <LoginLogo src={Letterlogo} />
-              <LoginId />
-              <LoginPw />
-              <LoginBtn>로그인</LoginBtn>
-              <GoogleLoginBtn>
+              <LoginId onChange={handleInputValue("email")} />
+              <LoginPw onChange={handleInputValue("password")} />
+              <LoginBtn onClick={handleLogin}>로그인</LoginBtn>
+              <GoogleLoginBtn onClick={socialLoginHandler(GOOGLE_AUTH_URL)}>
                 <GoogleImg src={Googlelogo} />
                 구글 로그인하기
               </GoogleLoginBtn>
-              <KakaoLoginBtn>
+              <KakaoLoginBtn onClick={socialLoginHandler(KAKAO_AUTH_URL)}>
                 <KakaoImg src={Kakaologo} />
                 카카오 로그인하기
               </KakaoLoginBtn>
