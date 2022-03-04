@@ -14,6 +14,7 @@ import { useState, useEffect } from "react";
 import BigScreen from "./pages/bigScreen";
 import GlobalStyle from "./globalStyle";
 import axios from "axios";
+import Write from "./pages/write";
 
 export interface Iprops {
   isLogin: boolean;
@@ -76,6 +77,7 @@ function App() {
           <Route path="/congratulaion" element={<Congratulation />} />
           <Route path="/request" element={<Request />} />
           <Route path="/bigScreen" element={<BigScreen />} />
+          <Route path="/write" element={<Write />} />
         </Routes>
         <Footer />
       </BrowserRouter>
