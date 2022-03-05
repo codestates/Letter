@@ -3,7 +3,7 @@ import styled from "styled-components";
 import logo from "../images/logo_letter.svg";
 import { Link } from "react-router-dom";
 import defaultImage from "../images/defaultImage-f.png";
-import { Iprops } from "../app";
+import { IUserProps } from "../types/propsInterface";
 
 const Container = styled.div`
   width: 100%;
@@ -112,10 +112,7 @@ const Avartar = styled.img`
   cursor: pointer;
 `;
 
-function Header(
-  isLogin: Iprops["isLogin"],
-  handleLogout: Iprops["handleLogout"]
-) {
+function Header({ isLogin, handleLogout }: IUserProps) {
   return (
     <div>
       <Container>
@@ -123,7 +120,9 @@ function Header(
           <Link to="/">
             <Logo src={logo} />
           </Link>
-          <LetterBtn>편지쓰기</LetterBtn>
+          <Link to="/main">
+            <LetterBtn>편지쓰기</LetterBtn>{" "}
+          </Link>
         </LeftContainer>
         <RightContainer>
           {!isLogin ? (

@@ -7,7 +7,7 @@ import Mypost from "../components/mypost";
 import { useState } from "react";
 import QuitModal from "../components/quitModal";
 import EditProfileModal from "../components/editProfileModal";
-import { Iprops } from "../app";
+import { IUserProps } from "../types/propsInterface";
 import { Link } from "react-router-dom";
 
 const BackgroundContainer = styled.div`
@@ -242,10 +242,7 @@ const MoreBtn = styled.button`
   }
 `;
 
-function Mypage(
-  isLogin: Iprops["isLogin"],
-  handleLogout: Iprops["handleLogout"]
-) {
+function Mypage({ isLogin, handleLogout }: IUserProps) {
   const [isOpen1, setIsOpen1] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
 

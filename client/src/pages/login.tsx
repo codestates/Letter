@@ -6,6 +6,8 @@ import Kakaologo from "../images/kakao_logo.jpeg";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { ISetLoginProps } from "../types/propsInterface";
 
 const BackgroundContainer = styled.div`
   width: 100vw;
@@ -160,7 +162,8 @@ const SignupBtn = styled.button`
   border: 1px solid #ab8643;
 `;
 
-function Login() {
+function Login({ setLogin }: ISetLoginProps) {
+  const navigate = useNavigate();
   const [loginInfo, setLoginInfo] = useState({ email: "", password: "" });
   const GOOGLE_AUTH_URL = `https://accounts.google.com/o/oauth2/auth?client_id=${process.env.REACT_APP_GOOGLE_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_GOOGLE_REDIRECT_URI}&response_type=code&scope=https://www.googleapis.com/auth/drive.metadata.readonly`;
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&response_type=code`;
@@ -181,6 +184,8 @@ function Login() {
       )
       .then((result) => {
         result;
+        setLogin(true);
+        navigate("/");
       });
   };
 
