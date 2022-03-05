@@ -190,7 +190,7 @@ const TextContainer = styled.textarea`
 `;
 
 const BtnContainer = styled.div`
-  width: 500px;
+  width: 350px;
   height: 100px;
   display: flex;
   justify-content: space-around;
@@ -291,12 +291,12 @@ function Write() {
   };
 
   const openModal = () => {
-    setShowModal(true);
-    console.log("모달");
+    setShowModal(!showModal);
+    console.log("모달", showModal);
   };
 
   const closeModal = () => {
-    setShowModal(false);
+    setShowModal(!showModal);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -316,26 +316,6 @@ function Write() {
   const handleFontset = (e: any) => {
     setFontType(e.target.value);
   };
-
-  // const [textValue, setTextValue] = useState("");
-
-  // const handleSetValue = (e: any) => {
-  //   setTextValue(e.target.value);
-  // };
-
-  // const handleSetTab = (e: any) => {
-  //   console.log(e.keyCode);
-  //   if (e.keyCode === 9) {
-  //     e.preventDefault();
-  //     const val = e.target.value;
-  //     const start = e.target.selectionStart;
-  //     const end = e.target.selectionEnd;
-  //     e.target.value = val.substring(0, start) + "\t" + val.substring(end);
-  //     e.target.selectionStart = e.target.selectionEnd = start + 1;
-  //     handleSetValue(e);
-  //     return false;
-  //   }
-  // };
 
   return (
     <div>
@@ -383,9 +363,6 @@ function Write() {
               id="text"
               theme={[fontSize, fontType]}
               placeholder="템플릿이 들어갈 자리입니다."
-              // value={textValue}
-              // onChange={(e) => handleSetValue(e)}
-              // onKeyDown={(e) => handleSetTab(e)}
             ></TextContainer>
           </LetterContainer>
           <BtnContainer>
@@ -398,8 +375,8 @@ function Write() {
             >
               저장
             </SaveBtn>
-            <NoticeSave open={showModal} close={closeModal} />
           </BtnContainer>
+          <NoticeSave open={showModal} close={closeModal} />
         </BackgroundContainer>
       </WriteContainer>
     </div>
