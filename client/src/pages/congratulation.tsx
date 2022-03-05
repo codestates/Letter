@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Headerimg from "../images/header.png";
 import Letterverse from "../components/letterverse";
+import Cong1 from "../components/lettercomponents/cong1";
+import Cong2 from "../components/lettercomponents/cong2";
+import Cong3 from "../components/lettercomponents/cong3";
+import Cong4 from "../components/lettercomponents/cong4";
 import BigScreen from "../pages/bigScreen";
 import { Link } from "react-router-dom";
 
@@ -37,6 +41,10 @@ const Templatebox = styled.div`
   display: flex;
   align-items: center;
   margin-left: 80px;
+  margin-right: 80px;
+  margin-top: 80px;
+  margin-bottom: 80px;
+  justify-content: space-around;
 `;
 const Template = styled.img`
   width: 200px;
@@ -49,19 +57,20 @@ const Template = styled.img`
   margin-left: 10px;
 `;
 
-function Congratulation() {
+function Cong() {
   return (
     <>
       <HeaderContainer />
       <TpTitle>축하</TpTitle>
       <br />
       <Templatebox>
-        <Link to="/bigScreen">
-          <Letterverse />
-        </Link>
+        <Cong1 />
+        <Cong2 />
+        <Cong3 />
+        <Cong4 />
       </Templatebox>
     </>
   );
 }
 
-export default Congratulation;
+export default Cong;

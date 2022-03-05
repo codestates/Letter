@@ -3,6 +3,18 @@ import styled from "styled-components";
 import Headerimg from "../images/header.png";
 import { Link } from "react-router-dom";
 import Letterverse from "../components/letterverse";
+import Thx1 from "../components/lettercomponents/thx1";
+import Thx2 from "../components/lettercomponents/thx2";
+import Thx3 from "../components/lettercomponents/thx3";
+import Thx4 from "../components/lettercomponents/thx4";
+import Cong1 from "../components/lettercomponents/cong1";
+import Cong2 from "../components/lettercomponents/cong2";
+import Cong3 from "../components/lettercomponents/cong3";
+import Cong4 from "../components/lettercomponents/cong4";
+import Req1 from "../components/lettercomponents/req1";
+import Req2 from "../components/lettercomponents/req2";
+import Req3 from "../components/lettercomponents/req3";
+import Req4 from "../components/lettercomponents/req4";
 
 const HeaderContainer = styled.div`
   width: 100vw;
@@ -87,14 +99,14 @@ function Main() {
       <div>
         <HeaderContainer />
         <TextContainer>
-          <div>감사인사</div>
+          <div>기념일</div>
         </TextContainer>
         <br />
         <Templatebox>
-          <Letterverse />
-          <Letterverse />
-          <Letterverse />
-          <Letterverse />
+          <Thx1 />
+          <Thx2 />
+          <Thx3 />
+          <Thx4 />
           <Link to="/thank">
             <MoreBtn>{">"}</MoreBtn>
           </Link>
@@ -105,10 +117,10 @@ function Main() {
         </TextContainer>
         <br />
         <Templatebox>
-          <Letterverse />
-          <Letterverse />
-          <Letterverse />
-          <Letterverse />
+          <Cong1 />
+          <Cong2 />
+          <Cong3 />
+          <Cong4 />
           <Link to="/congratulaion">
             <MoreBtn>{">"}</MoreBtn>
           </Link>
@@ -119,10 +131,10 @@ function Main() {
         </TextContainer>
         <br />
         <Templatebox>
-          <Letterverse />
-          <Letterverse />
-          <Letterverse />
-          <Letterverse />
+          <Req1 />
+          <Req2 />
+          <Req3 />
+          <Req4 />
           <Link to="/request">
             <MoreBtn>{">"}</MoreBtn>
           </Link>
