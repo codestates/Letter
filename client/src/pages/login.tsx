@@ -190,7 +190,7 @@ function Login({ setLogin }: ISetLoginProps) {
     const { email, password } = loginInfo;
     axios
       .post(
-        "http://localhost:7070/login",
+        `${process.env.REACT_APP_SERVER_URI}/login`,
         { email, password },
         {
           headers: { "Content-Type": "application/json" },
