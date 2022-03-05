@@ -34,7 +34,7 @@ function App() {
   ) => {
     await axios
       .post(
-        `http://localhost:7070${social}`,
+        `${process.env.REACT_APP_SERVER_URI}${social}`,
         { authorizationCode },
         { withCredentials: true }
       )
@@ -63,7 +63,7 @@ function App() {
   const handleLogout = () => {
     axios
       .post(
-        "http://localhost:7070/logout",
+        `${process.env.REACT_APP_SERVER_URI}/logout`,
         {},
         {
           headers: { "Content-Type": "application/json" },

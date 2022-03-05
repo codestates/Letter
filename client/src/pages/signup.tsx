@@ -228,7 +228,7 @@ function Signup() {
   const handleValidationCheck = (key: string, value: string | number) => () => {
     axios
       .post(
-        `http://localhost:7070/${key}check`,
+        `${process.env.REACT_APP_SERVER_URI}/${key}check`,
         { value },
         {
           headers: { "Content-Type": "application/json" },
@@ -244,7 +244,7 @@ function Signup() {
     const { email, password, name, nickname, gender } = userinfo;
     axios
       .post(
-        "http://localhost:7070/signup",
+        `${process.env.REACT_APP_SERVER_URI}/signup`,
         { email, password, name, nickname, gender },
         {
           headers: { "Content-Type": "application/json" },
