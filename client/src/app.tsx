@@ -23,8 +23,8 @@ export interface Iprops {
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
+  const [isSocialLogin, setIsSocialLogin] = useState(false);
   const [accessToken, setAccessToken] = useState("");
-
   useEffect(() => {
     componentSocialDidMount();
   }, []);
@@ -40,7 +40,8 @@ function App() {
       )
       .then((res) => {
         setAccessToken(res.data.data.access_token);
-        setIsLogin(true);
+        setIsSocialLogin(true);
+        // window.location.assign("http://localhost:3000/");
       })
       .catch((error: any) => {
         console.log(error);
@@ -55,21 +56,46 @@ function App() {
     }
   };
 
-  const handleLogout = () => {
-    setIsLogin(false);
+  const setLogin = (login: boolean) => {
+    setIsLogin(login);
   };
 
-  return (
+  const handleLogout = () => {
+    axios
+      .post(
+        "http://localhost:7070/logout",
+        {},
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      )
+      .then(() => {
+        setIsLogin(false);
+        setIsSocialLogin(false);
+      });
+  };
+
+  return isSocialLogin ? (
     <div>
       <GlobalStyle />
       <BrowserRouter>
-        <Header {...isLogin} {...handleLogout} />
+        <Header isLogin={isSocialLogin} handleLogout={handleLogout} />
+        <Landing />
+        <Footer />
+      </BrowserRouter>
+    </div>
+  ) : (
+    <div>
+      <GlobalStyle />
+      <BrowserRouter>
+        <Header isLogin={isLogin} handleLogout={handleLogout} />
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login setLogin={setLogin} />} />
           <Route
             path="/mypage"
-            element={<Mypage {...isLogin} {...handleLogout} />}
+            element={<Mypage isLogin={isLogin} handleLogout={handleLogout} />}
           />
           <Route path="/signup" element={<Signup />} />
           <Route path="/main" element={<Main />} />

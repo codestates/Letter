@@ -5,6 +5,7 @@ import FemaleLogo from "../images/defaultImage-f.png";
 import MaleLogo from "../images/defaultImage-m.png";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const BackgroundContainer = styled.div`
   width: 100vw;
@@ -116,7 +117,7 @@ const Password = styled.input.attrs({
 
 const PasswordCheck = styled.input.attrs({
   placeholder: "비밀번호확인",
-  type: "passwordVerify",
+  type: "password",
 })`
   margin-top: 5px;
   border-radius: 2px;
@@ -211,6 +212,7 @@ const SignupBtn = styled.button`
 `;
 //
 function Signup() {
+  const navigate = useNavigate();
   const [userinfo, setUserinfo] = useState({
     email: "",
     password: "",
@@ -224,14 +226,18 @@ function Signup() {
   };
 
   const handleValidationCheck = (key: string, value: string | number) => () => {
-    axios.post(
-      `http://localhost:7070/${key}check`,
-      { value },
-      {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      }
-    );
+    axios
+      .post(
+        `http://localhost:7070/${key}check`,
+        { value },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      )
+      .then((result) => {
+        result;
+      });
   };
 
   const handleSignup = () => {
@@ -247,6 +253,7 @@ function Signup() {
       )
       .then((result) => {
         result;
+        navigate("/login");
       });
   };
 
@@ -266,7 +273,7 @@ function Signup() {
                 </ValidationBtn>
               </EmailContainer>
               <Password onChange={handleInputValue("password")} />
-              <PasswordCheck onChange={handleInputValue("passwordVerify")} />
+              <PasswordCheck onChange={handleInputValue("password")} />
               <NameInput onChange={handleInputValue("name")} />
               <NicknameContainer>
                 <NicknameInput onChange={handleInputValue("nickname")} />
