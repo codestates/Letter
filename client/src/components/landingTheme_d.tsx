@@ -63,9 +63,10 @@ const ContainerText_a = styled.div`
 
 const ContainerText_b = styled.div`
   width: 29vmax;
-  height: 15vh;
+  height: 10vh;
   font-size: 3rem;
   font-weight: bold;
+  border: 1px solid red;
   @media (max-width: 1440px) {
     width: 100%;
     font-size: 2rem;

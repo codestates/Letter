@@ -7,6 +7,9 @@ import three from "../images/3.png";
 import four from "../images/4.png";
 import five from "../images/5.jpg";
 import { fontList } from "../font/fontList";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import NoticeSave from "../components/noticeSave";
 
 type Letter = {
   name: string;
@@ -152,10 +155,26 @@ const LetterContainer = styled.style`
   }
 `;
 
-const TextContainer = styled.input.attrs({
-  placeholder: "템플릿이 들어갈 자리입니다.",
-  type: "textarea",
-})`
+// const TextContainer = styled.input.attrs({
+//   placeholder: "템플릿이 들어갈 자리입니다.",
+//   type: "textarea",
+// })`
+//   resize: none;
+//   white-space: pre-wrap;
+//   background: transparent;
+//   width: 600px;
+//   height: 600px;
+//   border: 1px solid red;
+//   text-align: center;
+//   font-size: ${(props) => `${props.theme[0]}px`};
+//   font-family: ${(props) => props.theme[1]};
+//   @media (max-width: 768px) {
+//     width: 80%;
+//     height: 400px;
+//   }
+// `;
+
+const TextContainer = styled.textarea`
   resize: none;
   white-space: pre-wrap;
   background: transparent;
@@ -168,7 +187,6 @@ const TextContainer = styled.input.attrs({
   @media (max-width: 768px) {
     width: 80%;
     height: 400px;
-  }
 `;
 
 const BtnContainer = styled.div`
@@ -236,6 +254,51 @@ function Write() {
   const [checked, setChecked] = useState<Letter>({ name: "1", src: one });
   const [fontType, setFontType] = useState("");
   const [fontSize, setFontSize] = useState(20);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [letterContent, setLetterContent] = useState({
+    content: "",
+    category: "",
+    font: "",
+    font_size: 20,
+    letter_type: "",
+  });
+
+  type letterContent = {
+    [key: string]: any;
+  };
+
+  const navigate = useNavigate();
+
+  const handleLetterRequest = async (letterContent: letterContent) => {
+    console.log("여기다");
+    const formData = new FormData();
+    for (const key in letterContent) {
+      if (Array.isArray(letterContent[key])) {
+        formData.append(key, JSON.stringify(letterContent[key]));
+      }
+    }
+    const response = await axios.post(
+      `${process.env.REACT_APP_API_URL}/write`,
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+        withCredentials: true,
+      }
+    );
+    if (response.data.message === "ok") {
+      navigate("/mypage");
+    }
+  };
+
+  const openModal = () => {
+    setShowModal(true);
+    console.log("모달");
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     const selected = Letter.filter((letter) => letter.name === value);
@@ -319,6 +382,7 @@ function Write() {
             <TextContainer
               id="text"
               theme={[fontSize, fontType]}
+              placeholder="템플릿이 들어갈 자리입니다."
               // value={textValue}
               // onChange={(e) => handleSetValue(e)}
               // onKeyDown={(e) => handleSetTab(e)}
@@ -326,7 +390,15 @@ function Write() {
           </LetterContainer>
           <BtnContainer>
             <PreviewBtn>미리보기</PreviewBtn>
-            <SaveBtn>저장</SaveBtn>
+            <SaveBtn
+              onClick={() => {
+                handleLetterRequest(letterContent);
+                openModal();
+              }}
+            >
+              저장
+            </SaveBtn>
+            <NoticeSave open={showModal} close={closeModal} />
           </BtnContainer>
         </BackgroundContainer>
       </WriteContainer>
