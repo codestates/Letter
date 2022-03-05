@@ -2,6 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Headerimg from "../images/header.png";
 import Letterverse from "../components/letterverse";
+import Thx1 from "../components/lettercomponents/thx1";
+import Thx2 from "../components/lettercomponents/thx2";
+import Thx3 from "../components/lettercomponents/thx3";
+import Thx4 from "../components/lettercomponents/thx4";
+import Thx5 from "../components/lettercomponents/thx5";
+import Thx6 from "../components/lettercomponents/thx6";
+import Thx7 from "../components/lettercomponents/thx7";
 import BigScreen from "../pages/bigScreen";
 import { Link } from "react-router-dom";
 
@@ -37,6 +44,10 @@ const Templatebox = styled.div`
   display: flex;
   align-items: center;
   margin-left: 80px;
+  margin-right: 80px;
+  margin-top: 80px;
+  margin-bottom: 80px;
+  justify-content: space-around;
 `;
 const Template = styled.img`
   width: 200px;
@@ -53,12 +64,19 @@ function Thank() {
   return (
     <>
       <HeaderContainer />
-      <TpTitle>감사인사</TpTitle>
+      <TpTitle>기념일</TpTitle>
       <br />
       <Templatebox>
-        <Link to="/bigScreen">
-          <Letterverse />
-        </Link>
+        <Thx1 />
+        <Thx2 />
+        <Thx3 />
+        <Thx4 />
+      </Templatebox>
+      <Templatebox>
+        <Thx5 />
+        <Thx6 />
+        <Thx7 />
+        <Thx1 />
       </Templatebox>
     </>
   );

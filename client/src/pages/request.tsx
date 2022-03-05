@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Headerimg from "../images/header.png";
 import Letterverse from "../components/letterverse";
+import Req1 from "../components/lettercomponents/req1";
+import Req2 from "../components/lettercomponents/req2";
+import Req3 from "../components/lettercomponents/req3";
+import Req4 from "../components/lettercomponents/req4";
 import BigScreen from "../pages/bigScreen";
 import { Link } from "react-router-dom";
 
@@ -37,6 +41,10 @@ const Templatebox = styled.div`
   display: flex;
   align-items: center;
   margin-left: 80px;
+  margin-right: 80px;
+  margin-top: 80px;
+  margin-bottom: 80px;
+  justify-content: space-around;
 `;
 const Template = styled.img`
   width: 200px;
@@ -53,12 +61,13 @@ function Request() {
   return (
     <>
       <HeaderContainer />
-      <TpTitle>제안 및 요청</TpTitle>
+      <TpTitle>축하</TpTitle>
       <br />
       <Templatebox>
-        <Link to="/bigScreen">
-          <Letterverse />
-        </Link>
+        <Req1 />
+        <Req2 />
+        <Req3 />
+        <Req4 />
       </Templatebox>
     </>
   );
