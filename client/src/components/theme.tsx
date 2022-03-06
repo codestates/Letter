@@ -19,21 +19,43 @@ const BackgroundContainer = styled.div`
   }
 `;
 
-const Content = styled.div`
-  font-size: 6rem;
-  font-family: "Handletter";
-  @media (max-width: 768px) {
-    width: 55%;
-    font-size: 3rem;
-    display: flex;
+const Content_a = styled.div`
+  font-size: 7.5rem;
+  font-family: "KCC-eunyoung";
+  width: 1170px;
+  height: 150px;
+  @media (max-width: 1400px) {
+    width: 780px;
+    height: 100px;
+    font-size: 5rem;
     margin-top: 130px;
+  }
+  @media (max-width: 768px) {
+    width: 466px;
+    height: 60px;
+    font-size: 3rem;
+    margin-top: 130px;
+  }
+`;
+
+const Content_b = styled.div`
+  font-size: 2.5rem;
+  font-family: "SUIT-Thin";
+  @media (max-width: 1400px) {
+    width: 500px;
+    font-size: 1.8rem;
+  }
+  @media (max-width: 768px) {
+    width: 312px;
+    font-size: 1.2rem;
   }
 `;
 
 function Theme() {
   return (
     <BackgroundContainer>
-      <Content> &quot;당신의 아날로그 감성을 깨우세요.&quot;</Content>
+      <Content_a> &quot;당신의 아날로그 감성을 깨우세요.&quot;</Content_a>
+      <Content_b>손편지의 감동을 그대로 느낄 수 있습니다.</Content_b>
     </BackgroundContainer>
   );
 }

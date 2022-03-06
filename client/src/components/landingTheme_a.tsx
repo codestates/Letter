@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import image1 from "../images/Texting.svg";
+import useScrollFadeIn from "../hooks/useScrollFadeIn";
+import React, { useCallback, useEffect, useState } from "react";
 
 const BackgroundContainer1 = styled.div`
   width: 100vw;
@@ -91,11 +93,10 @@ const ContainerText_c = styled.div`
   }
 `;
 
-// const Container_2 = styled.div`
-//   width: 50vmax;
-//   height: 65vh;
-//   border: 1px solid red;
-// `;
+const Container_2 = styled.div`
+  width: 50vmax;
+  height: 65vh;
+`;
 
 const ContainerImage = styled.img`
   width: 50vmax;
@@ -108,18 +109,58 @@ const ContainerImage = styled.img`
 `;
 
 function LandingTheme_a() {
+  console.log(window.scrollY);
+  const [scrollPosition, setScrollPosition] = useState<number>(0);
+
+  const animationItem = {
+    image: useScrollFadeIn({ direction: "right", duration: 2, delay: 0.5 }),
+  };
+
+  const onScroll = useCallback(() => {
+    setScrollPosition(window.pageYOffset);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <BackgroundContainer1>
-      {/* <CardWapper> */}
-      <Container_1>
-        <ContainerText_a>디지털 시대에 지친</ContainerText_a>
-        <ContainerText_b>여러분의</ContainerText_b>
-        <ContainerText_c>아날로그 감성을 찾아드려요.</ContainerText_c>
+      <Container_1
+        style={{
+          opacity: `${scrollPosition > 1650 ? `0` : `1`}`,
+          transition: `${scrollPosition > 1650 ? `1s` : `0`}`,
+        }}
+      >
+        <ContainerText_a
+          style={{
+            opacity: `${(scrollPosition - 400) / 50}`,
+            transition: "0.5s",
+          }}
+        >
+          디지털 시대에 지친
+        </ContainerText_a>
+        <ContainerText_b
+          style={{
+            opacity: `${(scrollPosition - 600) / 50}`,
+            transition: "1s",
+          }}
+        >
+          여러분의
+        </ContainerText_b>
+        <ContainerText_c
+          style={{
+            opacity: `${(scrollPosition - 800) / 50}`,
+            transition: "1.5s",
+          }}
+        >
+          아날로그 감성을 찾아드려요.
+        </ContainerText_c>
       </Container_1>
-      {/* </CardWapper> */}
-      {/* <Container_2> */}
-      <ContainerImage src={image1} />
-      {/* </Container_2> */}
+      <Container_2 {...animationItem.image}>
+        <ContainerImage src={image1} />
+      </Container_2>
     </BackgroundContainer1>
   );
 }
