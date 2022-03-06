@@ -69,8 +69,3 @@ const useScrollFadeIn = ({ direction, duration, delay }: Props): returnType => {
 
 export default useScrollFadeIn;
 
-useScrollFadeIn.defaultProps = {
-  direction: "up",
-  duration: 1,
-  delay: 0,
-};
