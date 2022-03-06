@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import image2 from "../images/Envelope.svg";
 import useScrollFadeIn from "../hooks/useScrollFadeIn";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const BackgroundContainer1 = styled.div`
   width: 100vw;
