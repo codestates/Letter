@@ -27,16 +27,17 @@ const Container_1 = styled.div`
   align-items: center;
   flex-direction: column;
   width: 700px;
-  height: 95vh;
+  height: 80vh;
   font-family: "Noto Sans KR";
   font-size: 1.5rem;
   color: #455a64;
+  text-align: center;
   @media (max-width: 768px) {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 20vh;
+    height: 10vh;
     flex-direction: column;
   }
 `;
@@ -82,10 +83,11 @@ const ContainerText_b = styled.div`
 
 const Container_2 = styled.div`
   width: 35vmax;
-  height: 40vh;
+  height: 70vh;
   @media (max-width: 768px) {
     display: flex;
     justify-content: center;
+    height: 50vh;
   }
 `;
 
