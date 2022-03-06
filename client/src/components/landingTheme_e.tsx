@@ -29,7 +29,7 @@ const Container_1 = styled.div`
   justify-content: end;
   flex-direction: column;
   width: 40vmax;
-  height: 95vh;
+  height: 45vh;
   font-family: "Noto Sans KR";
   color: #455a64;
   @media (max-width: 768px) {
