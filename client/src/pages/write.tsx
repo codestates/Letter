@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import basic2 from "../images/basic2.png";
 import one from "../images/1.png";
 import two from "../images/2.jpeg";
 import three from "../images/3.png";
@@ -10,6 +9,7 @@ import { fontList } from "../font/fontList";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import NoticeSave from "../components/noticeSave";
+import Preview from "./preview";
 
 type Letter = {
   name: string;
@@ -24,9 +24,10 @@ const Letter: Letter[] = [
   { name: "five", src: five },
 ];
 
-const TopContainer = styled.img`
+const TopContainer = styled.div`
   width: 100%;
   height: 160px;
+  background-color: #fffcfb;
 `;
 
 const BackgroundContainer = styled.div`
@@ -187,6 +188,7 @@ const TextContainer = styled.textarea`
   @media (max-width: 768px) {
     width: 80%;
     height: 400px;
+  }
 `;
 
 const BtnContainer = styled.div`
@@ -255,6 +257,7 @@ function Write() {
   const [fontType, setFontType] = useState("");
   const [fontSize, setFontSize] = useState(20);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [showPreviewModal, setShowPreviewModal] = useState<boolean>(false);
   const [letterContent, setLetterContent] = useState({
     content: "",
     category: "",
@@ -299,6 +302,14 @@ function Write() {
     setShowModal(!showModal);
   };
 
+  const openPreviewModal = () => {
+    setShowPreviewModal(!showPreviewModal);
+  };
+
+  const closePreviewModal = () => {
+    setShowPreviewModal(!showPreviewModal);
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     const selected = Letter.filter((letter) => letter.name === value);
@@ -320,7 +331,7 @@ function Write() {
   return (
     <div>
       <WriteContainer>
-        <TopContainer src={basic2} />
+        <TopContainer />
         <BackgroundContainer>
           <RadioContainer>
             {Letter.map((letter) => (
@@ -366,7 +377,7 @@ function Write() {
             ></TextContainer>
           </LetterContainer>
           <BtnContainer>
-            <PreviewBtn>미리보기</PreviewBtn>
+            <PreviewBtn onClick={openPreviewModal}>미리보기</PreviewBtn>
             <SaveBtn
               onClick={() => {
                 handleLetterRequest(letterContent);
@@ -377,6 +388,7 @@ function Write() {
             </SaveBtn>
           </BtnContainer>
           <NoticeSave open={showModal} close={closeModal} />
+          <Preview open={showPreviewModal} close={closePreviewModal} />
         </BackgroundContainer>
       </WriteContainer>
     </div>
