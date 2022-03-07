@@ -42,7 +42,7 @@ const CloseBtn = styled.span`
   color: #9b9b9b;
   border-radius: 5px;
   cursor: pointer;
-  margin-left: 85%;
+  margin-left: 432px;
   margin-top: 2%;
   vertical-align: center;
   outline: 0;
