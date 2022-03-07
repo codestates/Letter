@@ -7,7 +7,7 @@ import Mypost from "../components/mypost";
 import { useState } from "react";
 import QuitModal from "../components/quitModal";
 import EditProfileModal from "../components/editProfileModal";
-import { IUserProps } from "../types/propsInterface";
+import { IMypageProps } from "../types/propsInterface";
 import { Link } from "react-router-dom";
 
 const BackgroundContainer = styled.div`
@@ -242,7 +242,7 @@ const MoreBtn = styled.button`
   }
 `;
 
-function Mypage({ isLogin, handleLogout }: IUserProps) {
+function Mypage({ handleLogout, userinfo, setUserinfo }: IMypageProps) {
   const [isOpen1, setIsOpen1] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
 
@@ -275,9 +275,18 @@ function Mypage({ isLogin, handleLogout }: IUserProps) {
                 </EditProfileBtn>
                 <QuitBtn onClick={modalHandler2}>회원 탈퇴</QuitBtn>
                 {isOpen1 ? (
-                  <EditProfileModal ModalHandler={modalHandler1} />
+                  <EditProfileModal
+                    ModalHandler={modalHandler1}
+                    userinfo={userinfo}
+                    setUserinfo={setUserinfo}
+                  />
                 ) : null}
-                {isOpen2 ? <QuitModal ModalHandler={modalHandler2} /> : null}
+                {isOpen2 ? (
+                  <QuitModal
+                    handleLogout={handleLogout}
+                    ModalHandler={modalHandler2}
+                  />
+                ) : null}
               </ButtonContainer>
             </ProfileContentContainer>
           </ProfileContainer>

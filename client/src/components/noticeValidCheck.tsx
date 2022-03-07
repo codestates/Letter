@@ -2,8 +2,8 @@ import styled from "styled-components";
 import check from "../images/check.svg";
 
 const BackgroundContainer = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
@@ -13,6 +13,7 @@ const BackgroundContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 999;
 `;
 
 const Container = styled.div`
@@ -42,12 +43,13 @@ const Check = styled.img`
 `;
 
 const Content_b = styled.div`
-  width: 141px;
+  width: 100px;
   height: 50px;
   color: #ab8643;
   font-family: "Noto Sans KR";
   font-size: 16px;
   font-weight: 400;
+  padding-left: 5px;
 `;
 
 const ConfirmBtn = styled.button`
@@ -66,12 +68,13 @@ const ConfirmBtn = styled.button`
     color: rgba(171, 134, 67, 1);
   }
 `;
+
 interface props {
   open: boolean;
   close: () => void;
 }
 
-function NoticeResign(props: props) {
+function NoticeValidCheck(props: props) {
   const { open, close } = props;
   return (
     <div>
@@ -81,7 +84,9 @@ function NoticeResign(props: props) {
             <Content_a>
               <Check src={check} />
             </Content_a>
-            <Content_b>회원 탈퇴되었습니다.</Content_b>
+            <Content_b>
+              사용 가능한<br></br>닉네임 입니다.
+            </Content_b>
             <ConfirmBtn onClick={close}>확인</ConfirmBtn>
           </Container>
         </BackgroundContainer>
@@ -90,4 +95,4 @@ function NoticeResign(props: props) {
   );
 }
 
-export default NoticeResign;
+export default NoticeValidCheck;
