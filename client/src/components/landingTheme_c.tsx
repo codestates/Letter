@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import image3 from "../images/Select.svg";
+import useScrollFadeIn from "../hooks/useScrollFadeIn";
+import React, { useCallback, useEffect, useState } from "react";
 
 const BackgroundContainer1 = styled.div`
   width: 100vw;
@@ -113,24 +115,82 @@ const ContainerText_d = styled.div`
   }
 `;
 
+const Container_2 = styled.div`
+  width: 35vmax;
+  height: 75vh;
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+  }
+`;
+
 const ContainerImage = styled.img`
   width: 35vmax;
   height: 75vh;
   @media (max-width: 768px) {
     margin-top: 100px;
-    height: 50%;
+    width: 110%;
+    height: 50vh;
   }
 `;
 
 function LandingTheme_c() {
+  const [scrollPosition, setScrollPosition] = useState<number>(0);
+
+  const animationItem = {
+    image: useScrollFadeIn({ direction: "left", duration: 1, delay: 0 }),
+  };
+
+  const onScroll = useCallback(() => {
+    setScrollPosition(window.pageYOffset);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <BackgroundContainer1>
-      <ContainerImage src={image3} />
-      <Container_1>
-        <ContainerText_a>#1.</ContainerText_a>
-        <ContainerText_b>편지 목적에 맞는</ContainerText_b>
-        <ContainerText_c>템플릿을 선택하세요.</ContainerText_c>
-        <ContainerText_d>
+      <Container_2 {...animationItem.image}>
+        <ContainerImage src={image3} />
+      </Container_2>
+      <Container_1
+        style={{
+          opacity: `${scrollPosition > 3500 ? `0` : `1`}`,
+          transition: `${scrollPosition > 3500 ? `1s` : `0`}`,
+        }}
+      >
+        <ContainerText_a
+          style={{
+            opacity: `${(scrollPosition - 2404) / 50}`,
+            transition: "1s",
+          }}
+        >
+          #1.
+        </ContainerText_a>
+        <ContainerText_b
+          style={{
+            opacity: `${(scrollPosition - 2430) / 50}`,
+            transition: "1.5s",
+          }}
+        >
+          편지 목적에 맞는
+        </ContainerText_b>
+        <ContainerText_c
+          style={{
+            opacity: `${(scrollPosition - 2530) / 50}`,
+            transition: "2s",
+          }}
+        >
+          템플릿을 선택하세요.
+        </ContainerText_c>
+        <ContainerText_d
+          style={{
+            opacity: `${(scrollPosition - 2660) / 50}`,
+            transition: "2s",
+          }}
+        >
           편지 작성이 어려우신 분들을 위해 기본적인 템플릿이 제공됩니다.
         </ContainerText_d>
       </Container_1>

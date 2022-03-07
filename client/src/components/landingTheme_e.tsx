@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import image5 from "../images/Printer.svg";
 import image6 from "../images/Emails.svg";
+import useScrollFadeIn from "../hooks/useScrollFadeIn";
+import React, { useCallback, useEffect, useState } from "react";
 
 const BackgroundContainer1 = styled.div`
   width: 100vmax;
@@ -27,11 +29,11 @@ const Container_1 = styled.div`
   justify-content: end;
   flex-direction: column;
   width: 40vmax;
-  height: 95vh;
+  height: 45vh;
   font-family: "Noto Sans KR";
   color: #455a64;
   @media (max-width: 768px) {
-    width: 100%;
+    width: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,11 +42,32 @@ const Container_1 = styled.div`
   }
 `;
 
+const ContainerImage_1 = styled.div`
+  width: 350px;
+  height: 250px;
+`;
+
 const ContainerEmailImage = styled.img`
   width: 350px;
   height: 250px;
   @media (max-width: 768px) {
     display: none;
+  }
+`;
+
+const ContainerText = styled.div`
+  width: 650px;
+  height: 100px;
+  @media (max-width: 1440px) {
+    width: 100%;
+    font-size: 2rem;
+    margin-left: 90px;
+  }
+  @media (max-width: 768px) {
+    width: 400px;
+    height: 250px;
+    font-size: 1.5rem;
+    margin-left: 0px;
   }
 `;
 
@@ -77,10 +100,10 @@ const ContainerText_b = styled.div`
     height: 7vh;
   }
   @media (max-width: 768px) {
-    width: 80%;
+    width: 400px;
     font-size: 2rem;
     margin-left: 0px;
-    height: 4vh;
+    height: 40px;
   }
 `;
 
@@ -99,7 +122,7 @@ const ContainerText_c = styled.div`
     width: 80%;
     font-size: 2rem;
     margin-left: 0px;
-    height: 10vh;
+    height: 90px;
   }
 `;
 
@@ -127,7 +150,6 @@ const ContainerImage = styled.div`
   display: flex;
   align-items: start;
   @media (max-width: 768px) {
-    margin-top: 100px;
     height: 50%;
   }
 `;
@@ -138,19 +160,70 @@ const ContentImage = styled.img`
 `;
 
 function LandingTheme_e() {
+  const [scrollPosition, setScrollPosition] = useState<number>(0);
+
+  const animationItem = {
+    image: useScrollFadeIn({ direction: "down", duration: 1.5, delay: 0.5 }),
+    image2: useScrollFadeIn({ direction: "left", duration: 1.5, delay: 0.5 }),
+  };
+
+  const onScroll = useCallback(() => {
+    setScrollPosition(window.pageYOffset);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <BackgroundContainer1>
-      <ContainerImage>
+      <ContainerImage {...animationItem.image}>
         <ContentImage src={image5} />
       </ContainerImage>
       <Container_1>
-        <ContainerEmailImage src={image6} />
-        <ContainerText_a>#3.</ContainerText_a>
-        <ContainerText_b>작성하신 편지는 인쇄를 통해</ContainerText_b>
-        <ContainerText_c>만나보실 수 있습니다.</ContainerText_c>
-        <ContainerText_d>
-          내 이메일로 받아보기 또는 인쇄하실 수 있습니다.
-        </ContainerText_d>
+        <ContainerImage_1 {...animationItem.image2}>
+          <ContainerEmailImage src={image6} />
+        </ContainerImage_1>
+        <ContainerText
+          style={{
+            opacity: `${scrollPosition > 5500 ? `0` : `1`}`,
+            transition: `${scrollPosition > 5500 ? `1s` : `0`}`,
+          }}
+        >
+          <ContainerText_a
+            style={{
+              opacity: `${(scrollPosition - 4135) / 50}`,
+              transition: "1s",
+            }}
+          >
+            #3.
+          </ContainerText_a>
+          <ContainerText_b
+            style={{
+              opacity: `${(scrollPosition - 4200) / 50}`,
+              transition: "1.5s",
+            }}
+          >
+            작성하신 편지는 인쇄를 통해
+          </ContainerText_b>
+          <ContainerText_c
+            style={{
+              opacity: `${(scrollPosition - 4420) / 50}`,
+              transition: "1.5s",
+            }}
+          >
+            만나보실 수 있습니다.
+          </ContainerText_c>
+          <ContainerText_d
+            style={{
+              opacity: `${(scrollPosition - 4515) / 50}`,
+              transition: "1.5s",
+            }}
+          >
+            내 이메일로 받아보기 또는 인쇄하실 수 있습니다.
+          </ContainerText_d>
+        </ContainerText>
       </Container_1>
     </BackgroundContainer1>
   );

@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import image4 from "../images/Typewriter.svg";
+import useScrollFadeIn from "../hooks/useScrollFadeIn";
+import React, { useCallback, useEffect, useState } from "react";
 
 const BackgroundContainer1 = styled.div`
   width: 100vmax;
@@ -26,7 +28,7 @@ const Container_1 = styled.div`
   justify-content: start;
   flex-direction: column;
   width: 30vmax;
-  height: 95vh;
+  height: 90vh;
   font-family: "Noto Sans KR";
   font-size: 2rem;
   color: #455a64;
@@ -66,7 +68,6 @@ const ContainerText_b = styled.div`
   height: 10vh;
   font-size: 3rem;
   font-weight: bold;
-  border: 1px solid red;
   @media (max-width: 1440px) {
     width: 100%;
     font-size: 2rem;
@@ -122,15 +123,14 @@ const ContainerText_d = styled.div`
 const ContainerImage = styled.div`
   width: 35vmax;
   height: 50vh;
-
   display: flex;
   justify-content: end;
   flex-direction: column;
 `;
 
 const ContentImage = styled.img`
-  width: 40vmax;
-  height: 75vh;
+  width: 35vmax;
+  height: 50vh;
 `;
 
 const ContainerBlank2 = styled.div`
@@ -139,18 +139,63 @@ const ContainerBlank2 = styled.div`
 `;
 
 function LandingTheme_d() {
+  const [scrollPosition, setScrollPosition] = useState<number>(0);
+
+  const animationItem = {
+    image: useScrollFadeIn({ direction: "up", duration: 0.5, delay: 0 }),
+  };
+
+  const onScroll = useCallback(() => {
+    setScrollPosition(window.pageYOffset);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   return (
     <BackgroundContainer1>
-      <Container_1>
+      <Container_1
+        style={{
+          opacity: `${scrollPosition > 4400 ? `0` : `1`}`,
+          transition: `${scrollPosition > 4400 ? `1s` : `0`}`,
+        }}
+      >
         <ContainerBlank />
-        <ContainerText_a>#2.</ContainerText_a>
-        <ContainerText_b>편지지와 글꼴을 선택 후</ContainerText_b>
-        <ContainerText_c>편지를 작성하세요.</ContainerText_c>
-        <ContainerText_d>
+        <ContainerText_a
+          style={{
+            opacity: `${(scrollPosition - 2900) / 50}`,
+            transition: "1s",
+          }}
+        >
+          #2.
+        </ContainerText_a>
+        <ContainerText_b
+          style={{
+            opacity: `${(scrollPosition - 3000) / 50}`,
+            transition: "1.5s",
+          }}
+        >
+          편지지와 글꼴을 선택 후
+        </ContainerText_b>
+        <ContainerText_c
+          style={{
+            opacity: `${(scrollPosition - 3100) / 50}`,
+            transition: "1.5s",
+          }}
+        >
+          편지를 작성하세요.
+        </ContainerText_c>
+        <ContainerText_d
+          style={{
+            opacity: `${(scrollPosition - 3196) / 50}`,
+            transition: "1.5s",
+          }}
+        >
           5가지 편지지 이미지와 109가지의 손글씨 글꼴이 제공됩니다.
         </ContainerText_d>
       </Container_1>
-      <ContainerImage>
+      <ContainerImage {...animationItem.image}>
         <ContainerBlank2 />
         <ContentImage src={image4} />
       </ContainerImage>

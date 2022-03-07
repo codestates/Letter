@@ -662,6 +662,24 @@ const GlobalStyle = createGlobalStyle`
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'SangSangFlowerRoad';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/SangSangFlowerRoad.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'KCC-eunyoung';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KCC-eunyoung-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SUIT-Thin';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Thin.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
 `;
 
 export default GlobalStyle;

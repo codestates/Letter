@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import React, { useCallback, useEffect, useState } from "react";
 
 const BackgroundContainer1 = styled.div`
   width: 100vw;
@@ -76,10 +77,33 @@ const StartBtn = styled.button`
 `;
 
 function LandingTheme_f() {
+  const [scrollPosition, setScrollPosition] = useState<number>(0);
+
+  const onScroll = useCallback(() => {
+    setScrollPosition(window.pageYOffset);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <BackgroundContainer1>
-      <Container>
-        <Content>&nbsp;&nbsp;이제 시작해보세요.</Content>
+      <Container
+        style={{
+          opacity: `${scrollPosition > 5600 ? `0` : `1`}`,
+          transition: `${scrollPosition > 5600 ? `1s` : `0`}`,
+        }}
+      >
+        <Content
+          style={{
+            opacity: `${(scrollPosition - 4900) / 50}`,
+            transition: "1.5s",
+          }}
+        >
+          &nbsp;&nbsp;이제 시작해보세요.
+        </Content>
         <BtnContainer>
           <StartBtn>시작하기</StartBtn>
         </BtnContainer>
