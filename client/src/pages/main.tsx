@@ -43,7 +43,8 @@ const Templatebox = styled.div`
   background-color: white;
   display: flex;
   align-items: center;
-  margin-left: 80px;
+  margin-top: 50px;
+  margin-bottom: 50px;
   justify-content: space-around;
 `;
 const TpTitle = styled.div`
@@ -58,11 +59,10 @@ const TpTitle = styled.div`
 const TextContainer = styled.div`
   width: 100%;
   height: 70px;
-  color: #ab8643;
-  background-color: #f6ecda;
-  text-decoration: underline;
-  text-underline-position: under;
-  text-decoration-color: #d3b47b;
+  align-items: center;
+  display: flex;
+  color: #090909;
+  background-color: #f0e0c1;
 `;
 const MoreBtn = styled.button`
   border: 1px solid #ab8643;
@@ -80,6 +80,9 @@ const MoreBtn = styled.button`
     box-shadow: -1px 1px 1px 1px gray;
   }
 `;
+const LandingContainer = styled.div`
+  overflow-x: hidden;
+`;
 
 function Main() {
   const tpTitle: string[] = ["감사인사", "축하", "제안 및 요청", "무제"];
@@ -94,7 +97,7 @@ function Main() {
     <BigScreen img={letter} />
   ) : (
     <>
-      <div>
+      <LandingContainer>
         <HeaderContainer />
         <TextContainer>
           <div>기념일</div>
@@ -163,7 +166,7 @@ function Main() {
         <Templatebox>
           <Letterverse />
         </Templatebox>
-      </div>
+      </LandingContainer>
     </>
   );
 }

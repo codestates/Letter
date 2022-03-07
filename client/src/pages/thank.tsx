@@ -31,7 +31,6 @@ const HeaderContainer = styled.div`
 const TpTitle = styled.div`
   width: 100%;
   height: 70px;
-  display: flex;
   align-items: center;
   display: flex;
   color: #090909;
@@ -43,8 +42,6 @@ const Templatebox = styled.div`
   background-color: white;
   display: flex;
   align-items: center;
-  margin-left: 80px;
-  margin-right: 80px;
   margin-top: 80px;
   margin-bottom: 80px;
   justify-content: space-around;
@@ -59,10 +56,13 @@ const Template = styled.img`
   margin-bottom: 10px;
   margin-left: 10px;
 `;
+const LandingContainer = styled.div`
+  overflow-x: hidden;
+`;
 
 function Thank() {
   return (
-    <>
+    <LandingContainer>
       <HeaderContainer />
       <TpTitle>기념일</TpTitle>
       <br />
@@ -78,7 +78,7 @@ function Thank() {
         <Thx7 />
         <Thx1 />
       </Templatebox>
-    </>
+    </LandingContainer>
   );
 }
 

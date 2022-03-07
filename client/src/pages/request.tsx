@@ -40,8 +40,6 @@ const Templatebox = styled.div`
   background-color: white;
   display: flex;
   align-items: center;
-  margin-left: 80px;
-  margin-right: 80px;
   margin-top: 80px;
   margin-bottom: 80px;
   justify-content: space-around;
@@ -56,12 +54,15 @@ const Template = styled.img`
   margin-bottom: 10px;
   margin-left: 10px;
 `;
+const LandingContainer = styled.div`
+  overflow-x: hidden;
+`;
 
 function Request() {
   return (
-    <>
+    <LandingContainer>
       <HeaderContainer />
-      <TpTitle>축하</TpTitle>
+      <TpTitle>제안 및 요청</TpTitle>
       <br />
       <Templatebox>
         <Req1 />
@@ -69,7 +70,7 @@ function Request() {
         <Req3 />
         <Req4 />
       </Templatebox>
-    </>
+    </LandingContainer>
   );
 }
 
