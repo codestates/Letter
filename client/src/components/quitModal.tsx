@@ -2,6 +2,7 @@ import styled from "styled-components";
 import FemaleLogo from "../images/defaultImage-f.png";
 import NoticeResign from "./noticeResign";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ModalContainer = styled.div`
   height: 15rem;
@@ -101,14 +102,25 @@ const QuitBtn = styled.button`
 `;
 
 type GreetFunction = (isModal: boolean) => void;
+type logoutFunction = () => void;
 type UserProps = {
   ModalHandler: GreetFunction;
+  handleLogout: logoutFunction;
 };
-function QuitModal({ ModalHandler }: UserProps): JSX.Element {
+function QuitModal({ ModalHandler, handleLogout }: UserProps): JSX.Element {
+  const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
+  const [openNotice, setOpenNotice] = useState(false);
   const modalHandler = () => {
     setOpenModal(!openModal);
     ModalHandler(false);
+  };
+  const noticeHandler = () => {
+    setOpenNotice(!openNotice);
+    handleLogout();
+    if (!openNotice) {
+      navigate("/");
+    }
   };
   return openModal ? (
     <div></div>
@@ -120,7 +132,10 @@ function QuitModal({ ModalHandler }: UserProps): JSX.Element {
           <ProfileImgContainer src={FemaleLogo} />
           <Password />
           <PasswordCheck />
-          <QuitBtn>회원 탈퇴</QuitBtn>
+          <QuitBtn onClick={noticeHandler}>회원 탈퇴</QuitBtn>
+          {openNotice ? (
+            <NoticeResign open={openNotice} close={noticeHandler} />
+          ) : null}
         </ModalView>
       </ModalBackdrop>
     </ModalContainer>

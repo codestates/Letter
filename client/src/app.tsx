@@ -20,11 +20,26 @@ export interface Iprops {
   isLogin: boolean;
   handleLogout: () => void;
 }
+type userinfo = {
+  email: string;
+  password: string;
+  name: string;
+  nickname: string;
+  gender: string;
+};
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [isSocialLogin, setIsSocialLogin] = useState(false);
   const [accessToken, setAccessToken] = useState("");
+  const [userinfo, setUserinfo] = useState<userinfo>({
+    email: "",
+    password: "",
+    name: "",
+    nickname: "",
+    gender: "",
+  });
+
   useEffect(() => {
     componentSocialDidMount();
   }, []);
@@ -95,9 +110,24 @@ function App() {
           <Route path="/login" element={<Login setLogin={setLogin} />} />
           <Route
             path="/mypage"
-            element={<Mypage isLogin={isLogin} handleLogout={handleLogout} />}
+            element={
+              <Mypage
+                handleLogout={handleLogout}
+                userinfo={userinfo}
+                setUserinfo={setUserinfo}
+              />
+            }
           />
-          <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/signup"
+            element={
+              <Signup
+                setIsLogin={setIsLogin}
+                userinfo={userinfo}
+                setUserinfo={setUserinfo}
+              />
+            }
+          />
           <Route path="/main" element={<Main />} />
           <Route path="/thank" element={<Thank />} />
           <Route path="/congratulaion" element={<Congratulation />} />
