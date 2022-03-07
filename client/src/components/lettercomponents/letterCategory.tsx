@@ -45,7 +45,7 @@ const Date = styled.div`
   width: 80px;
   height: 25px;
   text-align: left;
-  color: black;
+  color: #000000;
 `;
 
 const QuitBtn = styled.button`
@@ -78,7 +78,7 @@ function letterCategory(props: any) {
         <LetterImg src={props.img} />
         <Container2>
           <DateContainer>
-            <DateText>기념일</DateText>
+            {/* <DateText>기념일</DateText> */}
             <Date>{props.name}</Date>
           </DateContainer>
         </Container2>

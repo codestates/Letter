@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   width: 232px;
@@ -71,11 +72,12 @@ function Letterverse() {
   return (
     <div>
       <Container>
-        <LetterImg />
+        <Link to="/write">
+          <LetterImg />
+        </Link>
         <Container2>
           <DateContainer>
-            <DateText>감사</DateText>
-            <Date>스승의 날</Date>
+            <Date>무제</Date>
           </DateContainer>
         </Container2>
       </Container>
