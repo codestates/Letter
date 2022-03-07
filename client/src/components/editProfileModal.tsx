@@ -75,6 +75,7 @@ const EditProfileBtn = styled.button`
 const ProfileContentContainer = styled.div`
   width: 250px;
   height: 300px;
+  margin-top: 10px;
 `;
 
 const CloseBtn = styled.span`
@@ -85,8 +86,7 @@ const CloseBtn = styled.span`
   color: #9b9b9b;
   border-radius: 5px;
   cursor: pointer;
-  margin-left: 85%;
-  margin-top: 2%;
+  margin-left: 200px;
   vertical-align: center;
   outline: 0;
 `;
@@ -94,7 +94,17 @@ const CloseBtn = styled.span`
 const NicknameContainer = styled.div`
   width: 240px;
   height: 50px;
-  margin-top: 50px;
+  margin-top: 30px;
+`;
+
+const TextContainer = styled.div`
+  width: 80px;
+  height: 20px;
+  color: #ab8643;
+  text-decoration: underline;
+  text-underline-position: under;
+  text-decoration-color: #d3b47b;
+  margin-left: 7px;
 `;
 
 const NicknameInput = styled.input.attrs({
@@ -127,6 +137,17 @@ const ValidationBtn = styled.button`
     color: #ab8643;
     border: 1px solid #ab8643;
   }
+`;
+
+const TextContainer2 = styled.div`
+  width: 100px;
+  height: 20px;
+  color: #ab8643;
+  text-decoration: underline;
+  text-underline-position: under;
+  text-decoration-color: #d3b47b;
+  margin-left: 5px;
+  margin-top: 35px;
 `;
 
 const Password = styled.input.attrs({
@@ -198,9 +219,11 @@ function EditProfileModal({ ModalHandler }: UserProps): JSX.Element {
             <ProfileContentContainer>
               <CloseBtn onClick={modalHandler}>×</CloseBtn>
               <NicknameContainer>
+                <TextContainer>닉네임 변경</TextContainer>
                 <NicknameInput />
                 <ValidationBtn>중복 확인</ValidationBtn>
               </NicknameContainer>
+              <TextContainer2>비밀번호 변경</TextContainer2>
               <Password />
               <PasswordCheck />
             </ProfileContentContainer>

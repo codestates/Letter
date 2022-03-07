@@ -237,6 +237,7 @@ function Signup() {
       )
       .then((result) => {
         result;
+        console.log(result);
       });
   };
 
