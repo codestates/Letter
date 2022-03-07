@@ -1,8 +1,6 @@
 // 크게보기(Modal)
-import React from "react";
 import styled from "styled-components";
 import Headerimg from "../images/header.png";
-import { Link } from "react-router-dom";
 import BsLetter from "../components/bsLetter";
 
 const HeaderContainer = styled.div`
@@ -40,7 +38,7 @@ function BigScreen(props: any) {
     <div>
       <HeaderContainer />
       <Bigsc>
-        <BsLetter />
+        <BsLetter img={props.img} />
       </Bigsc>
     </div>
   );

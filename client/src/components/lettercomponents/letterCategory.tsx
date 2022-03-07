@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  width: 70vw;
-  height: 120vh;
+  width: 232px;
+  height: 350px;
   margin-left: 30px;
   box-shadow: -3px 3px 3px 3px gray;
   border-radius: 10px;
@@ -15,8 +15,8 @@ const Container = styled.div`
 
 const LetterImg = styled.img`
   border: 1px solid #fff3dd;
-  width: 60vw;
-  height: 95vh;
+  width: 160px;
+  height: 230px;
   margin-top: 20px;
 `;
 
@@ -49,9 +49,9 @@ const Date = styled.div`
 `;
 
 const QuitBtn = styled.button`
-  height: 50px;
-  width: 120px;
-  font-size: 20px;
+  height: 20px;
+  width: 40px;
+  font-size: 14px;
   cursor: pointer;
   background-color: rgb(252, 251, 251);
   color: #ab8643;
@@ -67,25 +67,24 @@ const QuitBtn = styled.button`
   }
 `;
 
-// const Print = props => {
-//   const { printRef } = props;
+function letterCategory(props: any) {
+  const handleClick = () => {
+    props.handleCheck(props.img);
+  };
 
-//   return <div ref={printRef}></div>
-// }
-
-function BsLetter(props: any) {
   return (
     <div>
-      <Container>
+      <Container onClick={handleClick}>
         <LetterImg src={props.img} />
         <Container2>
-          <DateContainer></DateContainer>
+          <DateContainer>
+            <DateText>기념일</DateText>
+            <Date>{props.name}</Date>
+          </DateContainer>
         </Container2>
-        <QuitBtn>인쇄하기</QuitBtn>
-        <QuitBtn>수정하기</QuitBtn>
       </Container>
     </div>
   );
 }
 
-export default BsLetter;
+export default letterCategory;
