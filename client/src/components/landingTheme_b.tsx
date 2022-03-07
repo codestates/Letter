@@ -131,7 +131,7 @@ function LandingTheme_b() {
       >
         <ContainerText_a
           style={{
-            opacity: `${(scrollPosition - 1540) / 50}`,
+            opacity: `${(scrollPosition - 1700) / 50}`,
             transition: "1s",
           }}
         >
