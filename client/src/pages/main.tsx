@@ -3,18 +3,9 @@ import styled from "styled-components";
 import Headerimg from "../images/header.png";
 import { Link } from "react-router-dom";
 import Letterverse from "../components/letterverse";
-import Thx1 from "../components/lettercomponents/thx1";
-import Thx2 from "../components/lettercomponents/thx2";
-import Thx3 from "../components/lettercomponents/thx3";
-import Thx4 from "../components/lettercomponents/thx4";
-import Cong1 from "../components/lettercomponents/cong1";
-import Cong2 from "../components/lettercomponents/cong2";
-import Cong3 from "../components/lettercomponents/cong3";
-import Cong4 from "../components/lettercomponents/cong4";
-import Req1 from "../components/lettercomponents/req1";
-import Req2 from "../components/lettercomponents/req2";
-import Req3 from "../components/lettercomponents/req3";
-import Req4 from "../components/lettercomponents/req4";
+import BigScreen from "./bigScreen";
+import LetterCategory from "../components/lettercomponents/letterCategory";
+import { thxs, congs, reqs } from "../types/category";
 
 const HeaderContainer = styled.div`
   width: 100vw;
@@ -94,7 +85,14 @@ function Main() {
   const tpTitle: string[] = ["감사인사", "축하", "제안 및 요청", "무제"];
   const [isChecked, setIsChecked] = useState(false); //체크여부
   const [checkedItems, setCheckedItems] = useState(new Set()); // 체크요소
-  return (
+  const [letter, setLetter] = useState("");
+  const handleCheck = (main: string) => {
+    setIsChecked(!isChecked);
+    setLetter(main);
+  };
+  return isChecked ? (
+    <BigScreen img={letter} />
+  ) : (
     <>
       <div>
         <HeaderContainer />
@@ -103,10 +101,16 @@ function Main() {
         </TextContainer>
         <br />
         <Templatebox>
-          <Thx1 />
-          <Thx2 />
-          <Thx3 />
-          <Thx4 />
+          {thxs.map((thx, idx) => {
+            return (
+              <LetterCategory
+                key={idx}
+                img={thx.img}
+                name={thx.name}
+                handleCheck={handleCheck}
+              />
+            );
+          })}
           <Link to="/thank">
             <MoreBtn>{">"}</MoreBtn>
           </Link>
@@ -117,10 +121,16 @@ function Main() {
         </TextContainer>
         <br />
         <Templatebox>
-          <Cong1 />
-          <Cong2 />
-          <Cong3 />
-          <Cong4 />
+          {congs.map((thx, idx) => {
+            return (
+              <LetterCategory
+                key={idx}
+                img={thx.img}
+                name={thx.name}
+                handleCheck={handleCheck}
+              />
+            );
+          })}
           <Link to="/congratulaion">
             <MoreBtn>{">"}</MoreBtn>
           </Link>
@@ -131,10 +141,16 @@ function Main() {
         </TextContainer>
         <br />
         <Templatebox>
-          <Req1 />
-          <Req2 />
-          <Req3 />
-          <Req4 />
+          {reqs.map((thx, idx) => {
+            return (
+              <LetterCategory
+                key={idx}
+                img={thx.img}
+                name={thx.name}
+                handleCheck={handleCheck}
+              />
+            );
+          })}
           <Link to="/request">
             <MoreBtn>{">"}</MoreBtn>
           </Link>
