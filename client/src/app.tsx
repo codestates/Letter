@@ -71,8 +71,9 @@ function App() {
     }
   };
 
-  const setLogin = (login: boolean) => {
+  const setLogin = (login: boolean, tok: string) => {
     setIsLogin(login);
+    setAccessToken(tok);
   };
 
   const handleLogout = () => {
@@ -112,9 +113,10 @@ function App() {
             path="/mypage"
             element={
               <Mypage
+                isLogin={isLogin}
                 handleLogout={handleLogout}
-                userinfo={userinfo}
-                setUserinfo={setUserinfo}
+                accessToken={accessToken}
+
               />
             }
           />
