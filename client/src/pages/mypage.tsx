@@ -313,9 +313,18 @@ function Mypage({ isLogin, handleLogout, accessToken }: IMypageProps) {
                 </EditProfileBtn>
                 <QuitBtn onClick={modalHandler2}>회원 탈퇴</QuitBtn>
                 {isOpen1 ? (
-                  <EditProfileModal ModalHandler={modalHandler1} />
+                  <EditProfileModal
+                    ModalHandler={modalHandler1}
+                    userinfo={userinfo}
+                    setUserinfo={setUserinfo}
+                  />
                 ) : null}
-                {isOpen2 ? <QuitModal ModalHandler={modalHandler2} /> : null}
+                {isOpen2 ? (
+                  <QuitModal
+                    handleLogout={handleLogout}
+                    ModalHandler={modalHandler2}
+                  />
+                ) : null}
               </ButtonContainer>
             </ProfileContentContainer>
           </ProfileContainer>

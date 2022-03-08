@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import FemaleLogo from "../images/defaultImage-f.png";
 import { useState } from "react";
+import NoticeSave from "./noticeSave";
+import NoticeValidCheck from "./noticeValidCheck";
 
 const ModalContainer = styled.div`
   height: 15rem;
@@ -197,15 +199,40 @@ const EditBtn = styled.button`
 `;
 
 type GreetFunction = (isModal: boolean) => void;
+type userinfo = {
+  email: string;
+  password: string;
+  name: string;
+  nickname: string;
+  gender: string;
+};
+type setStateFunction = (userinfo: userinfo) => void;
 type UserProps = {
   ModalHandler: GreetFunction;
+  userinfo: userinfo;
+  setUserinfo: setStateFunction;
 };
 
-function EditProfileModal({ ModalHandler }: UserProps): JSX.Element {
+function EditProfileModal({
+  ModalHandler,
+  userinfo,
+  setUserinfo,
+}: UserProps): JSX.Element {
   const [openModal, setOpenModal] = useState(false);
+  const [openNotice, setOpenNotice] = useState(false);
+  const [checkValid, setCheckValid] = useState(false);
   const modalHandler = () => {
     setOpenModal(!openModal);
     ModalHandler(false);
+  };
+  const handleInputValue = (key: string) => (e: any) => {
+    setUserinfo({ ...userinfo, [key]: e.target.value });
+  };
+  const noticeHandler = () => {
+    setOpenNotice(!openNotice);
+  };
+  const checkValidHandler = () => {
+    setCheckValid(!checkValid);
   };
   return (
     <ModalContainer>
@@ -220,15 +247,26 @@ function EditProfileModal({ ModalHandler }: UserProps): JSX.Element {
               <CloseBtn onClick={modalHandler}>×</CloseBtn>
               <NicknameContainer>
                 <TextContainer>닉네임 변경</TextContainer>
-                <NicknameInput />
-                <ValidationBtn>중복 확인</ValidationBtn>
+                <NicknameInput onChange={handleInputValue("nickname")} />
+                <ValidationBtn onClick={checkValidHandler}>
+                  중복 확인
+                </ValidationBtn>
+                {checkValid ? (
+                  <NoticeValidCheck
+                    open={checkValid}
+                    close={checkValidHandler}
+                  />
+                ) : null}
               </NicknameContainer>
               <TextContainer2>비밀번호 변경</TextContainer2>
-              <Password />
-              <PasswordCheck />
+              <Password onChange={handleInputValue("password")} />
+              <PasswordCheck onChange={handleInputValue("password")} />
             </ProfileContentContainer>
           </Container>
-          <EditBtn>편집 완료</EditBtn>
+          <EditBtn onClick={noticeHandler}>편집 완료</EditBtn>
+          {openNotice ? (
+            <NoticeSave open={openNotice} close={noticeHandler} />
+          ) : null}
         </ModalView>
       </ModalBackdrop>
     </ModalContainer>
