@@ -6,6 +6,7 @@ import MaleLogo from "../images/defaultImage-m.png";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ISignupProps } from "../types/propsInterface";
 
 const BackgroundContainer = styled.div`
   width: 100vw;
@@ -211,15 +212,8 @@ const SignupBtn = styled.button`
   }
 `;
 //
-function Signup() {
+function Signup({ setIsLogin, userinfo, setUserinfo }: ISignupProps) {
   const navigate = useNavigate();
-  const [userinfo, setUserinfo] = useState({
-    email: "",
-    password: "",
-    name: "",
-    nickname: "",
-    gender: "",
-  });
 
   const handleInputValue = (key: string) => (e: any) => {
     setUserinfo({ ...userinfo, [key]: e.target.value });
@@ -253,7 +247,8 @@ function Signup() {
         }
       )
       .then((result) => {
-        result;
+        console.log(result);
+        setIsLogin(true);
         navigate("/login");
       });
   };
