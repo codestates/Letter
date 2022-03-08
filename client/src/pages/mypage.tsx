@@ -1,14 +1,16 @@
 import styled from "styled-components";
 import mainImage from "../images/basic.jpg";
 import FemaleLogo from "../images/defaultImage-f.png";
-// import MaleLogo from "../images/defaultImage-m.png";
+import MaleLogo from "../images/defaultImage-m.png";
 import TypewriterImg from "../images/Typewriter.svg";
 import Mypost from "../components/mypost";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import QuitModal from "../components/quitModal";
 import EditProfileModal from "../components/editProfileModal";
-import { IUserProps } from "../types/propsInterface";
+import { IMypageProps } from "../types/propsInterface";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import MyTemplate from "../pages/myTemplate";
 
 const BackgroundContainer = styled.div`
   width: 100vw;
@@ -242,9 +244,35 @@ const MoreBtn = styled.button`
   }
 `;
 
-function Mypage({ isLogin, handleLogout }: IUserProps) {
+function Mypage({ isLogin, handleLogout, accessToken }: IMypageProps) {
   const [isOpen1, setIsOpen1] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
+  const [templates, setTemplates] = useState([]);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [gender, setGender] = useState("");
+  const [mytemplate, setMyTemplate] = useState({});
+  const [isTemplateClick, setIisTemplateClick] = useState(false);
+  useEffect(() => {
+    setUserProfile();
+  }, []);
+
+  const setUserProfile = () => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URI}/mypage`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      })
+      .then((result) => {
+        setTemplates(result.data.templates);
+        setName(result.data.user.name);
+        setEmail(result.data.user.email);
+        setGender(result.data.user.gender);
+      });
+  };
 
   const modalHandler1 = () => {
     setIsOpen1(!isOpen1);
@@ -253,7 +281,15 @@ function Mypage({ isLogin, handleLogout }: IUserProps) {
   const modalHandler2 = () => {
     setIsOpen2(!isOpen2);
   };
-  return (
+
+  const handleCheck = (template: object) => {
+    setIisTemplateClick(!isTemplateClick);
+    setMyTemplate(template);
+  };
+
+  return isTemplateClick ? (
+    <MyTemplate template={mytemplate} />
+  ) : (
     <div>
       <BackgroundContainer>
         <BackgroundImg>
@@ -261,13 +297,15 @@ function Mypage({ isLogin, handleLogout }: IUserProps) {
         </BackgroundImg>
         <Container>
           <ProfileContainer>
-            <ProfileImgContainer src={FemaleLogo}></ProfileImgContainer>
+            <ProfileImgContainer
+              src={gender === "female" ? FemaleLogo : MaleLogo}
+            ></ProfileImgContainer>
             <ProfileContentContainer>
               <Link to={{ pathname: "/" }}>
                 <LogoutBtn onClick={handleLogout}>로그아웃</LogoutBtn>
               </Link>
-              <NicknameContainer>손편지소녀</NicknameContainer>
-              <EmailContainer>letter123@letter.com</EmailContainer>
+              <NicknameContainer>{name}</NicknameContainer>
+              <EmailContainer>{email}</EmailContainer>
               <PasswordContainer>비밀번호: ********</PasswordContainer>
               <ButtonContainer>
                 <EditProfileBtn onClick={modalHandler1}>
@@ -291,10 +329,18 @@ function Mypage({ isLogin, handleLogout }: IUserProps) {
               <WriteLetterBtn>편지쓰러 가기</WriteLetterBtn>
             </Container2> */}
             <MypostContainer2>
-              <Mypost />
-              <Mypost />
-              <Mypost />
-              <MoreBtn> 〉</MoreBtn>
+              {templates
+                .map((template, idx) => {
+                  return (
+                    <Mypost
+                      key={idx}
+                      template={template}
+                      handleCheck={handleCheck}
+                    />
+                  );
+                })
+                .slice(0, 3)}
+              {templates.length < 3 ? <span></span> : <MoreBtn> 〉</MoreBtn>}
             </MypostContainer2>
           </MypostContainer>
         </Container>
