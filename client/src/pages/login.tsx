@@ -188,9 +188,10 @@ function Login({ setLogin }: ISetLoginProps) {
 
   const handleLogin = () => {
     const { email, password } = loginInfo;
+    const a = `${process.env.REACT_APP_SERVER_URI}/login`;
     axios
       .post(
-        `${process.env.REACT_APP_SERVER_URI}/login`,
+        a,
         { email, password },
         {
           headers: { "Content-Type": "application/json" },
@@ -198,8 +199,8 @@ function Login({ setLogin }: ISetLoginProps) {
         }
       )
       .then((result) => {
-        result;
-        setLogin(true);
+        result.data.tokendata;
+        setLogin(true, result.data.tokendata);
         navigate("/");
       });
   };

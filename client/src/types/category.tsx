@@ -10,6 +10,11 @@ import req1 from "../letterimg/자영업.png";
 import req2 from "../letterimg/개업식.png";
 import req3 from "../letterimg/결혼초대.png";
 import req4 from "../letterimg/브랜드 런칭.png";
+import one from "../images/1.png";
+import two from "../images/2.jpeg";
+import three from "../images/3.png";
+import four from "../images/4.png";
+import five from "../images/5.jpg";
 
 type category = {
   name: string;
@@ -37,4 +42,17 @@ const reqs: category[] = [
   { name: "브랜드", img: req4 },
 ];
 
-export { thxs, congs, reqs };
+type Letter = {
+  name: string;
+  src: string;
+};
+
+const Letter: Letter[] = [
+  { name: "one", src: one },
+  { name: "two", src: two },
+  { name: "three", src: three },
+  { name: "four", src: four },
+  { name: "five", src: five },
+];
+
+export { thxs, congs, reqs, Letter };

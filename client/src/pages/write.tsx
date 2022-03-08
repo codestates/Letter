@@ -17,7 +17,7 @@ type Letter = {
 };
 
 const Letter: Letter[] = [
-  { name: "first", src: one },
+  { name: "one", src: one },
   { name: "two", src: two },
   { name: "three", src: three },
   { name: "four", src: four },
@@ -254,43 +254,34 @@ const WriteContainer = styled.div`
 
 function Write() {
   const [checked, setChecked] = useState<Letter>({ name: "1", src: one });
-  const [fontType, setFontType] = useState("");
-  const [fontSize, setFontSize] = useState(20);
+  const [font, setFontType] = useState("Handletter");
+  const [font_size, setFontSize] = useState(20);
+  const [content, setTextContent] = useState("");
+  const [letter_type, setLetterType] = useState("one");
+  const [category, serCategory] = useState("thx");
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showPreviewModal, setShowPreviewModal] = useState<boolean>(false);
-  const [letterContent, setLetterContent] = useState({
-    content: "",
-    category: "",
-    font: "",
-    font_size: 20,
-    letter_type: "",
-  });
-
-  type letterContent = {
-    [key: string]: any;
-  };
 
   const navigate = useNavigate();
 
-  const handleLetterRequest = async (letterContent: letterContent) => {
-    console.log("여기다");
-    const formData = new FormData();
-    for (const key in letterContent) {
-      if (Array.isArray(letterContent[key])) {
-        formData.append(key, JSON.stringify(letterContent[key]));
-      }
-    }
-    const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}/write`,
-      formData,
-      {
-        headers: { "Content-Type": "multipart/form-data" },
-        withCredentials: true,
-      }
-    );
-    if (response.data.message === "ok") {
-      navigate("/mypage");
-    }
+  const handleLetterRequest = () => {
+    axios
+      .post(
+        `${process.env.REACT_APP_SERVER_URI}/writeletter`,
+        { content, category, font, font_size, letter_type },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      )
+      .then((result) => {
+        result;
+        navigate("/");
+      });
+  };
+
+  const handleInputValue = (e: any) => {
+    setTextContent(e.target.value);
   };
 
   const openModal = () => {
@@ -315,13 +306,14 @@ function Write() {
     const selected = Letter.filter((letter) => letter.name === value);
     if (selected) {
       setChecked(selected[0]);
+      setLetterType(value);
       // console.log("여기여기", selected[0]);
     }
   };
 
   const onClick = (cor: string) => () => {
-    if (cor === "+") setFontSize(fontSize + 1);
-    else setFontSize(fontSize - 1);
+    if (cor === "+") setFontSize(font_size + 1);
+    else setFontSize(font_size - 1);
   };
 
   const handleFontset = (e: any) => {
@@ -372,20 +364,14 @@ function Write() {
           <LetterContainer theme={checked.src}>
             <TextContainer
               id="text"
-              theme={[fontSize, fontType]}
+              theme={[font_size, font]}
               placeholder="템플릿이 들어갈 자리입니다."
+              onChange={handleInputValue}
             ></TextContainer>
           </LetterContainer>
           <BtnContainer>
             <PreviewBtn onClick={openPreviewModal}>미리보기</PreviewBtn>
-            <SaveBtn
-              onClick={() => {
-                handleLetterRequest(letterContent);
-                openModal();
-              }}
-            >
-              저장
-            </SaveBtn>
+            <SaveBtn onClick={handleLetterRequest}>저장</SaveBtn>
           </BtnContainer>
           <NoticeSave open={showModal} close={closeModal} />
           <Preview open={showPreviewModal} close={closePreviewModal} />

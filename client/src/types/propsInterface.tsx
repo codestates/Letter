@@ -1,4 +1,4 @@
-type loginFunction = (isModal: boolean) => void;
+type loginFunction = (isModal: boolean, token: string) => void;
 type logoutFunction = () => void;
 type userinfo = {
   email: string;
@@ -15,14 +15,16 @@ type IUserProps = {
   isLogin: boolean;
   handleLogout: logoutFunction;
 };
+
+type IMypageProps = {
+  isLogin: boolean;
+  handleLogout: logoutFunction;
+  accessToken: string;
+};
 type ISignupProps = {
   setIsLogin: loginFunction;
   userinfo: userinfo;
   setUserinfo: setStateFunction;
 };
-type IMypageProps = {
-  handleLogout: logoutFunction;
-  userinfo: userinfo;
-  setUserinfo: setStateFunction;
-};
 export { ISetLoginProps, IUserProps, ISignupProps, IMypageProps };
+
