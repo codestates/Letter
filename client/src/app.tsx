@@ -116,7 +116,8 @@ function App() {
                 isLogin={isLogin}
                 handleLogout={handleLogout}
                 accessToken={accessToken}
-
+                userinfo={userinfo}
+                setUserinfo={setUserinfo}
               />
             }
           />

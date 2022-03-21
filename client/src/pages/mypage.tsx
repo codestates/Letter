@@ -244,7 +244,13 @@ const MoreBtn = styled.button`
   }
 `;
 
-function Mypage({ isLogin, handleLogout, accessToken }: IMypageProps) {
+function Mypage({
+  isLogin,
+  handleLogout,
+  accessToken,
+  userinfo,
+  setUserinfo,
+}: IMypageProps) {
   const [isOpen1, setIsOpen1] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
   const [templates, setTemplates] = useState([]);

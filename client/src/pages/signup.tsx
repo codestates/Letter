@@ -248,7 +248,7 @@ function Signup({ setIsLogin, userinfo, setUserinfo }: ISignupProps) {
       )
       .then((result) => {
         console.log(result);
-        setIsLogin(true);
+        //setIsLogin(true);
         navigate("/login");
       });
   };
