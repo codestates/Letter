@@ -20,6 +20,8 @@ type IMypageProps = {
   isLogin: boolean;
   handleLogout: logoutFunction;
   accessToken: string;
+  userinfo: userinfo;
+  setUserinfo: setStateFunction;
 };
 type ISignupProps = {
   setIsLogin: loginFunction;
@@ -27,4 +29,3 @@ type ISignupProps = {
   setUserinfo: setStateFunction;
 };
 export { ISetLoginProps, IUserProps, ISignupProps, IMypageProps };
-
